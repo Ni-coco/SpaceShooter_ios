@@ -12,11 +12,15 @@ class GameScene: SKScene {
     
     let background = Background()
     let player = MainShip()
+    let ui = DisplayUI()
+    let fighter = Fighter()
     
     var playerBullets = [SKSpriteNode]()
         
     override func didMove(to view: SKView) {
         addChild(player)
+//        addChild(ui)
+        addChild(fighter)
         addBackground()
     }
     

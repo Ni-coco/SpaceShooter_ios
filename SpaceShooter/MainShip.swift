@@ -6,6 +6,7 @@
 //
 
 import SpriteKit
+import UIKit
 
 extension CGPoint {
     static func +(left: CGPoint, right: CGPoint) -> CGPoint {
@@ -42,6 +43,8 @@ class MainShip: SKNode, Ship {
     var shipSpeed: Double = 3.0
     var health = 4
     
+    let screenSize = UIScreen.main.bounds
+    
     override init() {
                 
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "Full Health"), color: .white, size: SKTexture(imageNamed: "Full Health").size())
@@ -51,25 +54,25 @@ class MainShip: SKNode, Ship {
         shield = SKSpriteNode(texture: SKTexture(imageNamed: "Shield"), color: .white, size: CGSize(width: 64, height: 64))
                 
         super.init()
-        
-        ship.position = CGPoint(x: self.frame.width / 2, y: self.frame.height - 460)
-        ship.zPosition = 3
+                
+        ship.position = CGPoint(x: 0, y: -screenSize.height / 2)
+        ship.zPosition = 4
         ship.setScale(1.8)
         
-        engine.position = CGPoint(x: self.frame.width / 2, y: self.frame.height - 465)
-        engine.zPosition = 1
+        engine.position = CGPoint(x: 0, y: -(screenSize.height / 2) - 5)
+        engine.zPosition = 2
         engine.setScale(1.8)
         
-        engineEffect.position = CGPoint(x: self.frame.width / 2, y: self.frame.height - 470)
-        engineEffect.zPosition = 2
+        engineEffect.position = CGPoint(x: 0, y: -(screenSize.height / 2) - 10)
+        engineEffect.zPosition = 3
         engineEffect.setScale(1.8)
         
-        weapon.position = CGPoint(x: self.frame.width / 2, y: self.frame.height - 460)
-        weapon.zPosition = 1
+        weapon.position = CGPoint(x: 0, y: -(screenSize.height / 2))
+        weapon.zPosition = 2
         weapon.setScale(1.8)
         
-        shield.position = CGPoint(x: self.frame.width / 2, y: self.frame.height - 452)
-        shield.zPosition = 3
+        shield.position = CGPoint(x: 0, y: -(screenSize.height / 2) + 8)
+        shield.zPosition = 4
         shield.setScale(1.8)
         shield.isHidden = true
         
