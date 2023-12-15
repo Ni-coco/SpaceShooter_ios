@@ -1,5 +1,5 @@
 //
-//  Fighter.swift
+//  Scout.swift
 //  SpaceShooter
 //
 //  Created by Nicolas Garde on 15/12/2023.
@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-class Fighter: SKNode, Ship, Enemies {
+class Scout: SKNode, Ship, Enemies {
     
     let ship: SKSpriteNode!
     let engine: SKSpriteNode!
@@ -19,9 +19,9 @@ class Fighter: SKNode, Ship, Enemies {
         
         self.sceneSize = sceneSize
 
-        ship = SKSpriteNode(texture: SKTexture(imageNamed: "FighterWeapon"), color: .white, size: CGSize(width: 64, height: 64))
-        engine = SKSpriteNode(texture: SKTexture(imageNamed: "FighterEngine"), color: .white, size: CGSize(width: 64, height: 64))
-        destruction = SKSpriteNode(texture: SKTexture(imageNamed: "FighterDestruction"), color: .white, size: CGSize(width: 64, height: 64))
+        ship = SKSpriteNode(texture: SKTexture(imageNamed: "ScoutWeapon"), color: .white, size: CGSize(width: 64, height: 64))
+        engine = SKSpriteNode(texture: SKTexture(imageNamed: "ScoutEngine"), color: .white, size: CGSize(width: 64, height: 64))
+        destruction = SKSpriteNode(texture: SKTexture(imageNamed: "ScoutDestruction"), color: .white, size: CGSize(width: 64, height: 64))
         
         super.init()
         
@@ -41,8 +41,8 @@ class Fighter: SKNode, Ship, Enemies {
         destruction.isHidden = true
         destruction.zRotation = .pi
         
-        setFirstSprite(sprite: ship, spriteSheet: SKTexture(imageNamed: "FighterWeapon"), spriteWidth: 64.0)
-        animateSprite(sprite: engine, spriteSheet: SKTexture(imageNamed: "FighterEngine"), duration: 0.15, spriteWidth: 64.0)
+        setFirstSprite(sprite: ship, spriteSheet: SKTexture(imageNamed: "ScoutWeapon"), spriteWidth: 64.0)
+        animateSprite(sprite: engine, spriteSheet: SKTexture(imageNamed: "ScoutEngine"), duration: 0.15, spriteWidth: 64.0)
         
         addChild(ship)
         addChild(engine)

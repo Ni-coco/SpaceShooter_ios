@@ -43,10 +43,12 @@ class MainShip: SKNode, Ship {
     var shipSpeed: Double = 3.0
     var health = 4
     
-    let screenSize = UIScreen.main.bounds
-    
-    override init() {
+    let sceneSize: CGSize
+
+    init(sceneSize: CGSize) {
                 
+        self.sceneSize = sceneSize
+        
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "Full Health"), color: .white, size: SKTexture(imageNamed: "Full Health").size())
         engine = SKSpriteNode(texture: SKTexture(imageNamed: engineList[engineChoice]), color: .white, size: SKTexture(imageNamed: engineList[engineChoice]).size())
         engineEffect = SKSpriteNode(texture: SKTexture(imageNamed: engineListsMovement[engineChoice][0]), color: .white, size: CGSize(width: 48, height: 48))
@@ -54,24 +56,24 @@ class MainShip: SKNode, Ship {
         shield = SKSpriteNode(texture: SKTexture(imageNamed: "Shield"), color: .white, size: CGSize(width: 64, height: 64))
                 
         super.init()
-                
-        ship.position = CGPoint(x: 0, y: -screenSize.height / 2)
+                        
+        ship.position = CGPoint(x: 0, y: -(self.sceneSize.height / 2) + 100)
         ship.zPosition = 4
         ship.setScale(1.8)
         
-        engine.position = CGPoint(x: 0, y: -(screenSize.height / 2) - 5)
+        engine.position = CGPoint(x: 0, y: -(self.sceneSize.height / 2) + 95)
         engine.zPosition = 2
         engine.setScale(1.8)
         
-        engineEffect.position = CGPoint(x: 0, y: -(screenSize.height / 2) - 10)
+        engineEffect.position = CGPoint(x: 0, y:-(self.sceneSize.height / 2) + 90)
         engineEffect.zPosition = 3
         engineEffect.setScale(1.8)
         
-        weapon.position = CGPoint(x: 0, y: -(screenSize.height / 2))
+        weapon.position = CGPoint(x: 0, y: -(self.sceneSize.height / 2) + 100)
         weapon.zPosition = 2
         weapon.setScale(1.8)
         
-        shield.position = CGPoint(x: 0, y: -(screenSize.height / 2) + 8)
+        shield.position = CGPoint(x: 0, y: -(self.sceneSize.height / 2) + 108)
         shield.zPosition = 4
         shield.setScale(1.8)
         shield.isHidden = true
