@@ -43,11 +43,11 @@ class MainShip: SKNode, Ship {
     var shipSpeed: Double = 3.0
     var health = 4
     
-    let sceneSize: CGSize
+    let viewSize: CGRect
 
-    init(sceneSize: CGSize) {
+    init(sceneSize: CGRect) {
                 
-        self.sceneSize = sceneSize
+        self.viewSize = sceneSize
         
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "Full Health"), color: .white, size: SKTexture(imageNamed: "Full Health").size())
         engine = SKSpriteNode(texture: SKTexture(imageNamed: engineList[engineChoice]), color: .white, size: SKTexture(imageNamed: engineList[engineChoice]).size())
@@ -56,24 +56,24 @@ class MainShip: SKNode, Ship {
         shield = SKSpriteNode(texture: SKTexture(imageNamed: "Shield"), color: .white, size: CGSize(width: 64, height: 64))
                 
         super.init()
-                        
-        ship.position = CGPoint(x: 0, y: -(self.sceneSize.height / 2) + 100)
+        
+        ship.position = CGPoint(x: 0, y: -(viewSize.height * 0.5))
         ship.zPosition = 4
         ship.setScale(1.8)
         
-        engine.position = CGPoint(x: 0, y: -(self.sceneSize.height / 2) + 95)
+        engine.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 95)
         engine.zPosition = 2
         engine.setScale(1.8)
         
-        engineEffect.position = CGPoint(x: 0, y:-(self.sceneSize.height / 2) + 90)
+        engineEffect.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 90)
         engineEffect.zPosition = 3
         engineEffect.setScale(1.8)
         
-        weapon.position = CGPoint(x: 0, y: -(self.sceneSize.height / 2) + 100)
+        weapon.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 100)
         weapon.zPosition = 2
         weapon.setScale(1.8)
         
-        shield.position = CGPoint(x: 0, y: -(self.sceneSize.height / 2) + 108)
+        shield.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 108)
         shield.zPosition = 4
         shield.setScale(1.8)
         shield.isHidden = true

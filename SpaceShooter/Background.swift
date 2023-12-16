@@ -20,6 +20,9 @@ class Background: SKNode {
         
         bg2 = SKSpriteNode(texture: texture, color: .white, size: texture.size())
         
+        bg1.zPosition = -1
+        bg2.zPosition = -1
+        
         super.init()
         
         addChild(bg1)

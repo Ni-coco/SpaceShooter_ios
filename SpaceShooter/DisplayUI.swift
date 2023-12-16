@@ -13,9 +13,9 @@ class DisplayUI: SKNode {
     let lifeUI: SKSpriteNode
     let shieldUI: SKSpriteNode
     
-    let sceneSize: CGSize
+    let sceneSize: CGRect
 
-    init(sceneSize: CGSize) {
+    init(sceneSize: CGRect) {
         
         self.sceneSize = sceneSize
 
@@ -24,11 +24,16 @@ class DisplayUI: SKNode {
         
         super.init()
         
-        lifeUI.position = CGPoint(x: -(self.sceneSize.width / 2) + 150, y: -(self.sceneSize.height / 2) + 100)
+        let initialXPosition = sceneSize.minX + lifeUI.size.width / 2.0 // Adjust if necessary
+        let initialYPosition = sceneSize.minY + lifeUI.size.height / 2.0 // Adjust if necessary
+        lifeUI.position = CGPoint(x: initialXPosition, y: initialYPosition + 30)
+        shieldUI.position = CGPoint(x: initialXPosition, y: initialYPosition)
+        
+//        lifeUI.position = CGPoint(x: sceneSize.minX + 90, y: sceneSize.minY + 60)
         lifeUI.zPosition = 1
         lifeUI.setScale(1.2)
         
-        shieldUI.position = CGPoint(x: -(self.sceneSize.width / 2) + 150, y: -(self.sceneSize.height / 2) + 70)
+//        shieldUI.position = CGPoint(x: sceneSize.minX + 90, y: sceneSize.minY + 30)
         shieldUI.zPosition = 1
         shieldUI.setScale(1.2)
                             

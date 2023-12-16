@@ -21,23 +21,34 @@ class GameScene: SKScene {
     
     var playerBullets = [SKSpriteNode]()
     var enemies = [Enemies]()
+    
+    var tmp = SKSpriteNode(imageNamed: "Full Health")
         
     override func didMove(to view: SKView) {
+        
         addBackground()
+        let viewSize = view.frame
+        
+        print("View minX: \(viewSize.minX)")
+        print("View maxX: \(viewSize.maxX)")
+        print("View minY: \(viewSize.minY)")
+        print("View maxY: \(viewSize.maxY)")
+        print("View width: \(viewSize.width)")
+        print("View height: \(viewSize.height)")
 
-        player = MainShip(sceneSize: size)
-        ui = DisplayUI(sceneSize: size)
+        player = MainShip(sceneSize: view.frame)
+//        ui = DisplayUI(sceneSize: frame)
 //        fighter = Fighter(sceneSize: size)
 //        scout = Scout(sceneSize: size)
 //        frigate = Frigate(sceneSize: size)
-        dreadnought = Dreadnought(sceneSize: size)
+//        dreadnought = Dreadnought(sceneSize: screenSize)
         
         addChild(player)
-        addChild(ui)
+//        addChild(ui)
 //        addChild(fighter)
 //        addChild(scout)
 //        addChild(frigate)
-        addChild(dreadnought)
+//        addChild(dreadnought)
     }
     
     func addBackground() {
