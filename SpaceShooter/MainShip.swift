@@ -40,10 +40,11 @@ class MainShip: SKNode, Ship {
     var direction: CGVector = CGVector(dx: 0.0, dy: 0.0)
     
     var shootSpeed: Double = 2.0
-    var shipSpeed: Double = 3.0
+    var shipSpeed: Double = 1.5
     var health = 4
     
     let viewSize: CGRect
+    var scale: CGFloat = 0
 
     init(sceneSize: CGRect) {
                 
@@ -57,26 +58,29 @@ class MainShip: SKNode, Ship {
                 
         super.init()
         
-        ship.position = CGPoint(x: 0, y: -(viewSize.height * 0.5))
+        scale = getScale(sceneSize: sceneSize)
+        
+        ship.position = CGPoint(x: 0, y: -(viewSize.height / 2) + 100)
         ship.zPosition = 4
-        ship.setScale(1.8)
         
         engine.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 95)
         engine.zPosition = 2
-        engine.setScale(1.8)
         
         engineEffect.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 90)
         engineEffect.zPosition = 3
-        engineEffect.setScale(1.8)
         
         weapon.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 100)
         weapon.zPosition = 2
-        weapon.setScale(1.8)
         
         shield.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 108)
         shield.zPosition = 4
-        shield.setScale(1.8)
         shield.isHidden = true
+        
+        ship.setScale(scale)
+        engine.setScale(scale)
+        engineEffect.setScale(scale)
+        weapon.setScale(scale)
+        shield.setScale(scale)
         
         animateSprite(sprite: engineEffect, spriteSheet: SKTexture(imageNamed: engineListsMovement[engineChoice][0]), duration: 0.15, spriteWidth: 48.0)
         animateSprite(sprite: shield, spriteSheet: SKTexture(imageNamed: "Shield"), duration: 0.15, spriteWidth: 64)
@@ -120,16 +124,17 @@ class MainShip: SKNode, Ship {
     
     func canonShoot() -> [SKSpriteNode] {
         var bullets = [SKSpriteNode]()
-        var x = weapon.position.x - 16
-        var y = weapon.position.y + 18
+        var x = weapon.position.x - (9 * scale)
+        var y = weapon.position.y + (18 * scale)
         for _ in 0..<2 {
-            let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 32.0, height: 32.0))
+            let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 16, height: 16))
             bullet.position = CGPoint(x: x, y: y)
             bullet.zPosition = 5
+            bullet.setScale(scale)
             animateSprite(sprite: bullet, spriteSheet: SKTexture(imageNamed: bulletList[weaponChoice]), duration: 0.3, spriteWidth: 32)
             bullets.append(bullet)
-            x += 33
-            y -= 5
+            x += (18 * scale)
+            y -= (5 * scale)
         }
         return bullets
     }
@@ -137,9 +142,10 @@ class MainShip: SKNode, Ship {
     func spaceBullet() -> [SKSpriteNode] {
         var bullets = [SKSpriteNode]()
         
-        let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 32.0, height: 32.0))
-        bullet.position = CGPoint(x: weapon.position.x, y: weapon.position.y + 15)
+        let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 16, height: 16))
+        bullet.position = CGPoint(x: weapon.position.x, y: weapon.position.y + (15 * scale))
         bullet.zPosition = 5
+        bullet.setScale(scale)
         animateSprite(sprite: bullet, spriteSheet: SKTexture(imageNamed: bulletList[weaponChoice]), duration: 0.3, spriteWidth: 32)
         bullets.append(bullet)
         
@@ -148,28 +154,30 @@ class MainShip: SKNode, Ship {
     
     func rocketBullet() -> [SKSpriteNode] {
         var bullets = [SKSpriteNode]()
-        var x = weapon.position.x - 18
+        var x = weapon.position.x - (10 * scale)
         for _ in 0..<2 {
-            let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 32.0, height: 32.0))
-            bullet.position = CGPoint(x: x, y: weapon.position.y + 16)
+            let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 16, height: 16))
+            bullet.position = CGPoint(x: x, y: weapon.position.y + (16 * scale))
             bullet.zPosition = 5
+            bullet.setScale(scale)
             animateSprite(sprite: bullet, spriteSheet: SKTexture(imageNamed: bulletList[weaponChoice]), duration: 0.3, spriteWidth: 32)
             bullets.append(bullet)
-            x += 37
+            x += (21 * scale)
         }
         return bullets
     }
     
     func zapperBullet() -> [SKSpriteNode] {
         var bullets = [SKSpriteNode]()
-        var x = weapon.position.x - 16
+        var x = weapon.position.x - (8 * scale)
         for _ in 0..<2 {
-            let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 32.0, height: 32.0))
-            bullet.position = CGPoint(x: x, y: weapon.position.y + 16)
+            let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 16, height: 16))
+            bullet.position = CGPoint(x: x, y: weapon.position.y + (16 * scale))
             bullet.zPosition = 5
+            bullet.setScale(scale)
             animateSprite(sprite: bullet, spriteSheet: SKTexture(imageNamed: bulletList[weaponChoice]), duration: 0.3, spriteWidth: 32)
             bullets.append(bullet)
-            x += 32
+            x += (16 * scale)
         }
         return bullets
     }

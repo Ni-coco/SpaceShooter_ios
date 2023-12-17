@@ -31,11 +31,14 @@ class Background: SKNode {
     
     func scaleToSceneSize() {
         if let scene = scene {
-            let scaleRatio = scene.size.height / bg1.size.height
-            bg1.setScale(scaleRatio)            
-            bg2.setScale(scaleRatio)
-            
-            bg2.position = CGPoint(x: 0, y: bg1.size.height)
+            // Calculate scale based on the scene's size
+            let scaleX = scene.size.width / bg1.size.width
+            let scaleY = scene.size.height / bg1.size.height
+            bg1.setScale(max(scaleX, scaleY))
+            bg2.setScale(max(scaleX, scaleY))
+
+            // Position the second background node just above the first one
+            bg2.position = CGPoint(x: 0, y: bg1.position.y + bg1.size.height)
         }
     }
 

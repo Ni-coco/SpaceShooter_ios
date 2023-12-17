@@ -18,7 +18,7 @@ class GameViewController: UIViewController {
             // Load the SKScene from 'GameScene.sks'
             if let scene = SKScene(fileNamed: "GameScene") {
                 // Set the scale mode to scale to fit the window
-                scene.scaleMode = .aspectFill
+                scene.scaleMode = .resizeFill
                 
                 // Present the scene
                 view.presentScene(scene)
@@ -28,6 +28,14 @@ class GameViewController: UIViewController {
             view.showsPhysics = true
             view.showsFPS = true
             view.showsNodeCount = true
+        }
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        if let skView = view as? SKView {
+            if let scene = skView.scene {
+                scene.size = size
+            }
         }
     }
 

@@ -10,6 +10,8 @@ import GameplayKit
 
 class GameScene: SKScene {
     
+    var viewSize: CGRect = CGRect()
+    
     let background = Background()
     
     var player = MainShip(sceneSize: .zero)
@@ -21,27 +23,19 @@ class GameScene: SKScene {
     
     var playerBullets = [SKSpriteNode]()
     var enemies = [Enemies]()
-    
-    var tmp = SKSpriteNode(imageNamed: "Full Health")
-        
+            
     override func didMove(to view: SKView) {
         
-        addBackground()
-        let viewSize = view.frame
+        viewSize = view.frame
         
-        print("View minX: \(viewSize.minX)")
-        print("View maxX: \(viewSize.maxX)")
-        print("View minY: \(viewSize.minY)")
-        print("View maxY: \(viewSize.maxY)")
-        print("View width: \(viewSize.width)")
-        print("View height: \(viewSize.height)")
+        addBackground()
 
-        player = MainShip(sceneSize: view.frame)
-//        ui = DisplayUI(sceneSize: frame)
-//        fighter = Fighter(sceneSize: size)
-//        scout = Scout(sceneSize: size)
-//        frigate = Frigate(sceneSize: size)
-//        dreadnought = Dreadnought(sceneSize: screenSize)
+        player = MainShip(sceneSize: viewSize)
+//        ui = DisplayUI(sceneSize: viewSize)
+//        fighter = Fighter(sceneSize: viewSize)
+//        scout = Scout(sceneSize: viewSize)
+//        frigate = Frigate(sceneSize: viewSize)
+//        dreadnought = Dreadnought(sceneSize: viewSize)
         
         addChild(player)
 //        addChild(ui)
@@ -49,6 +43,8 @@ class GameScene: SKScene {
 //        addChild(scout)
 //        addChild(frigate)
 //        addChild(dreadnought)
+        
+
     }
     
     func addBackground() {
@@ -130,10 +126,10 @@ class GameScene: SKScene {
                 playerBullets.append(bullet)
             }
         }
-        
+                
         for bullet in playerBullets {
-            bullet.position.y += 3
-            if bullet.position.y > UIScreen.main.bounds.height {
+            bullet.position.y += 2
+            if bullet.position.y > viewSize.height / 2 {
                 bulletsToRemove.append(bullet)
             }
         }

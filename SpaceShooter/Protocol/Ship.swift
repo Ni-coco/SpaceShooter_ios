@@ -31,4 +31,9 @@ extension Ship {
         let firstTexture = SKTexture(rect: CGRect(x: 0, y: 0, width: spriteWidth / spriteSheet.size().width, height: 1), in: spriteSheet)
         sprite.texture = firstTexture
     }
+    
+    func getScale(sceneSize: CGRect) -> CGFloat {
+        let screenHeight = max(sceneSize.height, sceneSize.width)  // Use the larger dimension as a reference
+        return (screenHeight / 844)  // Adjust this factor as needed
+    }
 }
