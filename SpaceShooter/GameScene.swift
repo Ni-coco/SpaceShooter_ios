@@ -14,12 +14,12 @@ class GameScene: SKScene {
     
     let background = Background()
     
-    var player = MainShip(sceneSize: .zero)
-    var ui = DisplayUI(sceneSize: .zero)
-    var fighter = Fighter(sceneSize: .zero)
-    var scout = Scout(sceneSize: .zero)
-    var frigate = Frigate(sceneSize: .zero)
-    var dreadnought = Dreadnought(sceneSize: .zero)
+    var player: MainShip?
+    var ui: DisplayUI?
+    var fighter: Fighter?
+    var scout: Scout?
+    var frigate: Frigate?
+    var dreadnought: Dreadnought?
     
     var playerBullets = [SKSpriteNode]()
     var enemies = [Enemies]()
@@ -30,21 +30,24 @@ class GameScene: SKScene {
         
         addBackground()
 
-        player = MainShip(sceneSize: viewSize)
-//        ui = DisplayUI(sceneSize: viewSize)
-//        fighter = Fighter(sceneSize: viewSize)
-//        scout = Scout(sceneSize: viewSize)
-//        frigate = Frigate(sceneSize: viewSize)
-//        dreadnought = Dreadnought(sceneSize: viewSize)
+        player = MainShip(viewSize: viewSize)
+        ui = DisplayUI(viewSize: viewSize)
+        fighter = Fighter(viewSize: viewSize)
+        scout = Scout(viewSize: viewSize)
+        frigate = Frigate(viewSize: viewSize)
+        dreadnought = Dreadnought(viewSize: viewSize)
         
-        addChild(player)
-//        addChild(ui)
-//        addChild(fighter)
-//        addChild(scout)
-//        addChild(frigate)
-//        addChild(dreadnought)
+        addChild(player!)
+        addChild(ui!)
+        addChild(fighter!)
+        addChild(scout!)
+        addChild(frigate!)
+        addChild(dreadnought!)
         
-
+        enemies.append(fighter!)
+        enemies.append(scout!)
+        enemies.append(frigate!)
+        enemies.append(dreadnought!)
     }
     
     func addBackground() {
@@ -64,7 +67,7 @@ class GameScene: SKScene {
     var lastTouches = [UITouch]()
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        player.manageEngineEffect(isMoving: true)
+        player!.manageEngineEffect(isMoving: true)
         lastTouches.append(touches.first!)
         updateDirection()
     }
@@ -81,8 +84,8 @@ class GameScene: SKScene {
             }
         }
         if (lastTouches.isEmpty) {
-            player.manageEngineEffect(isMoving: false)
-            player.direction = CGVector(dx: 0.0, dy: 0.0)
+            player!.manageEngineEffect(isMoving: false)
+            player!.direction = CGVector(dx: 0.0, dy: 0.0)
         }
     }
     
@@ -95,13 +98,13 @@ class GameScene: SKScene {
         guard let touch = lastTouches.last else { return }
         let touchLocation = touch.location(in: self)
         
-        let direction = CGVector(dx: touchLocation.x - player.ship.position.x,
-                                 dy: touchLocation.y - player.ship.position.y)
+        let direction = CGVector(dx: touchLocation.x - player!.ship.position.x,
+                                 dy: touchLocation.y - player!.ship.position.y)
         
         let length = sqrt(direction.dx * direction.dx + direction.dy * direction.dy)
         
         if length > 0 {
-            player.direction = CGVector(dx: direction.dx / length, dy: direction.dy / length)
+            player!.direction = CGVector(dx: direction.dx / length, dy: direction.dy / length)
         }
     }
     
@@ -111,7 +114,7 @@ class GameScene: SKScene {
     }
     
     func updatePlayer() {
-        player.moveShip()
+        player!.moveShip()
         updatePlayerShoot()
         updateEnemies()
     }
@@ -119,8 +122,8 @@ class GameScene: SKScene {
     func updatePlayerShoot() {
         var bulletsToRemove = [SKSpriteNode]()
 
-        if !player.isShooting {
-            let bulletsToAdd = player.shoot()
+        if !player!.isShooting {
+            let bulletsToAdd = player!.shoot()
             for bullet in bulletsToAdd {
                 addChild(bullet)
                 playerBullets.append(bullet)

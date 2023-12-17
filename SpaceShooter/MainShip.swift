@@ -46,9 +46,9 @@ class MainShip: SKNode, Ship {
     let viewSize: CGRect
     var scale: CGFloat = 0
 
-    init(sceneSize: CGRect) {
+    init(viewSize: CGRect) {
                 
-        self.viewSize = sceneSize
+        self.viewSize = viewSize
         
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "Full Health"), color: .white, size: SKTexture(imageNamed: "Full Health").size())
         engine = SKSpriteNode(texture: SKTexture(imageNamed: engineList[engineChoice]), color: .white, size: SKTexture(imageNamed: engineList[engineChoice]).size())
@@ -58,22 +58,22 @@ class MainShip: SKNode, Ship {
                 
         super.init()
         
-        scale = getScale(sceneSize: sceneSize)
+        scale = getScale(sceneSize: viewSize)
         
-        ship.position = CGPoint(x: 0, y: -(viewSize.height / 2) + 100)
-        ship.zPosition = 4
+        ship.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 100)
+        ship.zPosition = 104
         
         engine.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 95)
-        engine.zPosition = 2
+        engine.zPosition = 102
         
         engineEffect.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 90)
-        engineEffect.zPosition = 3
+        engineEffect.zPosition = 103
         
         weapon.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 100)
-        weapon.zPosition = 2
+        weapon.zPosition = 102
         
         shield.position = CGPoint(x: 0, y: -(viewSize.maxY / 2) + 108)
-        shield.zPosition = 4
+        shield.zPosition = 104
         shield.isHidden = true
         
         ship.setScale(scale)
@@ -129,7 +129,7 @@ class MainShip: SKNode, Ship {
         for _ in 0..<2 {
             let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 16, height: 16))
             bullet.position = CGPoint(x: x, y: y)
-            bullet.zPosition = 5
+            bullet.zPosition = 105
             bullet.setScale(scale)
             animateSprite(sprite: bullet, spriteSheet: SKTexture(imageNamed: bulletList[weaponChoice]), duration: 0.3, spriteWidth: 32)
             bullets.append(bullet)
@@ -144,7 +144,7 @@ class MainShip: SKNode, Ship {
         
         let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 16, height: 16))
         bullet.position = CGPoint(x: weapon.position.x, y: weapon.position.y + (15 * scale))
-        bullet.zPosition = 5
+        bullet.zPosition = 105
         bullet.setScale(scale)
         animateSprite(sprite: bullet, spriteSheet: SKTexture(imageNamed: bulletList[weaponChoice]), duration: 0.3, spriteWidth: 32)
         bullets.append(bullet)
@@ -158,7 +158,7 @@ class MainShip: SKNode, Ship {
         for _ in 0..<2 {
             let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 16, height: 16))
             bullet.position = CGPoint(x: x, y: weapon.position.y + (16 * scale))
-            bullet.zPosition = 5
+            bullet.zPosition = 105
             bullet.setScale(scale)
             animateSprite(sprite: bullet, spriteSheet: SKTexture(imageNamed: bulletList[weaponChoice]), duration: 0.3, spriteWidth: 32)
             bullets.append(bullet)
@@ -173,7 +173,7 @@ class MainShip: SKNode, Ship {
         for _ in 0..<2 {
             let bullet = SKSpriteNode(texture: SKTexture(imageNamed: bulletList[weaponChoice]), color: .white, size: CGSize(width: 16, height: 16))
             bullet.position = CGPoint(x: x, y: weapon.position.y + (16 * scale))
-            bullet.zPosition = 5
+            bullet.zPosition = 105
             bullet.setScale(scale)
             animateSprite(sprite: bullet, spriteSheet: SKTexture(imageNamed: bulletList[weaponChoice]), duration: 0.3, spriteWidth: 32)
             bullets.append(bullet)

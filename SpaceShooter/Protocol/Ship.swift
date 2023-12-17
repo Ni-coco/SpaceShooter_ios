@@ -33,7 +33,7 @@ extension Ship {
     }
     
     func getScale(sceneSize: CGRect) -> CGFloat {
-        let screenHeight = max(sceneSize.height, sceneSize.width)  // Use the larger dimension as a reference
-        return (screenHeight / 844)  // Adjust this factor as needed
+        let screenHeight = max(sceneSize.height, sceneSize.width)
+        return (screenHeight / 844)
     }
 }

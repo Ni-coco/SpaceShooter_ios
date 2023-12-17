@@ -13,29 +13,29 @@ class DisplayUI: SKNode {
     let lifeUI: SKSpriteNode
     let shieldUI: SKSpriteNode
     
-    let sceneSize: CGRect
+    let viewSize: CGRect
+    var scale: CGFloat = 0
 
-    init(sceneSize: CGRect) {
+    init(viewSize: CGRect) {
         
-        self.sceneSize = sceneSize
+        self.viewSize = viewSize
 
         lifeUI = SKSpriteNode(texture: SKTexture(imageNamed: "health4"))
         shieldUI = SKSpriteNode(texture: SKTexture(imageNamed: "shield4"))
         
         super.init()
         
-        let initialXPosition = sceneSize.minX + lifeUI.size.width / 2.0 // Adjust if necessary
-        let initialYPosition = sceneSize.minY + lifeUI.size.height / 2.0 // Adjust if necessary
-        lifeUI.position = CGPoint(x: initialXPosition, y: initialYPosition + 30)
-        shieldUI.position = CGPoint(x: initialXPosition, y: initialYPosition)
+        scale = getScale(viewSize: viewSize)
         
-//        lifeUI.position = CGPoint(x: sceneSize.minX + 90, y: sceneSize.minY + 60)
+        
+        lifeUI.position = CGPoint(x: -(viewSize.maxX / 2) + (75 * scale), y: -(viewSize.maxY / 2) + (37.5 * scale))
+        shieldUI.position = CGPoint(x: -(viewSize.maxX / 2) + (75 * scale), y: -(viewSize.maxY / 2) + (62.5 * scale))
+        
         lifeUI.zPosition = 1
-        lifeUI.setScale(1.2)
+        lifeUI.setScale(scale)
         
-//        shieldUI.position = CGPoint(x: sceneSize.minX + 90, y: sceneSize.minY + 30)
         shieldUI.zPosition = 1
-        shieldUI.setScale(1.2)
+        shieldUI.setScale(scale)
                             
         addChild(lifeUI)
         addChild(shieldUI)
@@ -44,5 +44,10 @@ class DisplayUI: SKNode {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func getScale(viewSize: CGRect) -> CGFloat {
+        let screenHeight = max(viewSize.height, viewSize.width)
+        return(screenHeight / 1055)
     }
 }

@@ -17,7 +17,6 @@ class Background: SKNode {
         bg1 = SKSpriteNode(texture: texture, color: .white, size: texture.size())
         bg1.position = CGPoint(x: 0, y: 0)
         
-        
         bg2 = SKSpriteNode(texture: texture, color: .white, size: texture.size())
         
         bg1.zPosition = -1

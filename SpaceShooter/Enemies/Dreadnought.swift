@@ -9,15 +9,21 @@ import SpriteKit
 
 class Dreadnought: SKNode, Ship, Enemies {
     
-    let ship: SKSpriteNode!
-    let engine: SKSpriteNode!
-    let destruction: SKSpriteNode!
+    var ship: SKSpriteNode!
+    var engine: SKSpriteNode!
+    var destruction: SKSpriteNode!
     
-    let sceneSize: CGSize
+    //Enemies protocol
+    var viewSize: CGRect
+    var spawn: CGPoint = CGPoint()
+    var moving: CGPoint = CGPoint()
+    var shipSize: CGSize = CGSize()
+    var scale: CGFloat = 0
+    var shipSpeed: CGFloat = 0.6
 
-    init(sceneSize: CGSize) {
+    init(viewSize: CGRect) {
         
-        self.sceneSize = sceneSize
+        self.viewSize = viewSize
 
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "DreadnoughtWeapon"), color: .white, size: CGSize(width: 128, height: 128))
         engine = SKSpriteNode(texture: SKTexture(imageNamed: "DreadnoughtEngine"), color: .white, size: CGSize(width: 128, height: 128))
@@ -25,19 +31,24 @@ class Dreadnought: SKNode, Ship, Enemies {
         
         super.init()
         
-        ship.position = CGPoint(x: 0, y: self.sceneSize.height / 2 - 160)
-        ship.zPosition = 2
-        ship.setScale(2)
+        scale = getScale(sceneSize: viewSize)
+        shipSize = CGSize(width: ship.size.width / 2, height: ship.size.height)
+        spawn = generateSpawn()
+        moving = generateDestination()
+        
+        ship.position = CGPoint(x: spawn.x, y: spawn.y)
+        ship.zPosition = 11
+        ship.setScale(scale * 1.2)
         ship.zRotation = .pi
         
-        engine.position = CGPoint(x: 0, y: self.sceneSize.height / 2 - 160)
-        engine.zPosition = 1
-        engine.setScale(2)
+        engine.position = CGPoint(x: spawn.x, y: spawn.y)
+        engine.zPosition = 10
+        engine.setScale(scale * 1.2)
         engine.zRotation = .pi
         
-        destruction.position = CGPoint(x: 0, y: self.sceneSize.height / 2 - 160)
-        destruction.zPosition = 2
-        destruction.setScale(2)
+        destruction.position = CGPoint(x: spawn.x, y: spawn.y)
+        destruction.zPosition = 10
+        destruction.setScale(scale * 1.2)
         destruction.isHidden = true
         destruction.zRotation = .pi
         

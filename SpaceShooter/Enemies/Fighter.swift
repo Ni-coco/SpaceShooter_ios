@@ -9,15 +9,21 @@ import SpriteKit
 
 class Fighter: SKNode, Ship, Enemies {
     
-    let ship: SKSpriteNode!
-    let engine: SKSpriteNode!
-    let destruction: SKSpriteNode!
+    var ship: SKSpriteNode!
+    var engine: SKSpriteNode!
+    var destruction: SKSpriteNode!
     
-    let sceneSize: CGSize
-
-    init(sceneSize: CGSize) {
+    //Enemies protocol
+    var viewSize: CGRect
+    var spawn: CGPoint = CGPoint()
+    var moving: CGPoint = CGPoint()
+    var shipSize: CGSize = CGSize()
+    var scale: CGFloat = 0
+    var shipSpeed: CGFloat = 1.2
+    
+    init(viewSize: CGRect) {
         
-        self.sceneSize = sceneSize
+        self.viewSize = viewSize
 
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "FighterWeapon"), color: .white, size: CGSize(width: 64, height: 64))
         engine = SKSpriteNode(texture: SKTexture(imageNamed: "FighterEngine"), color: .white, size: CGSize(width: 64, height: 64))
@@ -25,19 +31,24 @@ class Fighter: SKNode, Ship, Enemies {
         
         super.init()
         
-        ship.position = CGPoint(x: 0, y: self.sceneSize.height / 2 - 140)
-        ship.zPosition = 2
-        ship.setScale(1.8)
+        scale = getScale(sceneSize: viewSize)
+        shipSize = CGSize(width: ship.size.width / 2, height: ship.size.height)
+        spawn = generateSpawn()
+        moving = generateDestination()
+
+        ship.position = CGPoint(x: spawn.x, y: spawn.y)
+        ship.zPosition = 14
+        ship.setScale(scale)
         ship.zRotation = .pi
         
-        engine.position = CGPoint(x: 0, y: self.sceneSize.height / 2 - 140)
-        engine.zPosition = 1
-        engine.setScale(1.8)
+        engine.position = CGPoint(x: spawn.x, y: spawn.y)
+        engine.zPosition = 14
+        engine.setScale(scale)
         engine.zRotation = .pi
         
-        destruction.position = CGPoint(x: 0, y: self.sceneSize.height / 2 - 140)
-        destruction.zPosition = 2
-        destruction.setScale(1.8)
+        destruction.position = CGPoint(x: spawn.x, y: spawn.y)
+        destruction.zPosition = 14
+        destruction.setScale(scale)
         destruction.isHidden = true
         destruction.zRotation = .pi
         
