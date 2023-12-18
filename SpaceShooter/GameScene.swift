@@ -22,6 +22,7 @@ class GameScene: SKScene {
     var dreadnought: Dreadnought?
     
     var playerBullets = [SKSpriteNode]()
+    var enemiesBullets = [Bullet]()
     var enemies = [Enemies]()
             
     override func didMove(to view: SKView) {
@@ -32,21 +33,21 @@ class GameScene: SKScene {
 
         player = MainShip(viewSize: viewSize)
         ui = DisplayUI(viewSize: viewSize)
-        fighter = Fighter(viewSize: viewSize)
-        scout = Scout(viewSize: viewSize)
-        frigate = Frigate(viewSize: viewSize)
+//        fighter = Fighter(viewSize: viewSize)
+//        scout = Scout(viewSize: viewSize)
+//        frigate = Frigate(viewSize: viewSize)
         dreadnought = Dreadnought(viewSize: viewSize)
         
         addChild(player!)
         addChild(ui!)
-        addChild(fighter!)
-        addChild(scout!)
-        addChild(frigate!)
+//        addChild(fighter!)
+//        addChild(scout!)
+//        addChild(frigate!)
         addChild(dreadnought!)
         
-        enemies.append(fighter!)
-        enemies.append(scout!)
-        enemies.append(frigate!)
+//        enemies.append(fighter!)
+//        enemies.append(scout!)
+//        enemies.append(frigate!)
         enemies.append(dreadnought!)
     }
     
@@ -148,6 +149,16 @@ class GameScene: SKScene {
     func updateEnemies() {
         for enemy in enemies {
             enemy.updateMovement()
+            let bullets = enemy.shoot()
+            if !bullets.isEmpty {
+                for bullet in bullets {
+                    enemiesBullets.append(bullet)
+                    addChild(bullet.bulletSprite)
+                }
+            }
+        }
+        for bullet in enemiesBullets {
+            bullet.updateMovement()
         }
     }
 }

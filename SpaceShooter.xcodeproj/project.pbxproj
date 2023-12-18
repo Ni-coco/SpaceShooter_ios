@@ -13,6 +13,9 @@
 		3C2878AA2B2CFD9800AE553E /* Scout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878A92B2CFD9800AE553E /* Scout.swift */; };
 		3C2878AC2B2CFE1C00AE553E /* Frigate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878AB2B2CFE1C00AE553E /* Frigate.swift */; };
 		3C2878B02B2CFED300AE553E /* Dreadnought.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878AF2B2CFED300AE553E /* Dreadnought.swift */; };
+		3C82EBFF2B304D87002A236A /* EnergyBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C82EBFE2B304D87002A236A /* EnergyBullet.swift */; };
+		3C82EC012B304DAB002A236A /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C82EC002B304DAB002A236A /* Bullet.swift */; };
+		3C82EC032B305309002A236A /* Animate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C82EC022B305309002A236A /* Animate.swift */; };
 		3CBBE6B22B29A2980083EA04 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6B12B29A2980083EA04 /* AppDelegate.swift */; };
 		3CBBE6B42B29A2980083EA04 /* GameScene.sks in Resources */ = {isa = PBXBuildFile; fileRef = 3CBBE6B32B29A2980083EA04 /* GameScene.sks */; };
 		3CBBE6B82B29A2980083EA04 /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6B72B29A2980083EA04 /* GameScene.swift */; };
@@ -22,7 +25,6 @@
 		3CBBE6C22B29A2990083EA04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CBBE6C02B29A2990083EA04 /* LaunchScreen.storyboard */; };
 		3CBBE6C92B29A3940083EA04 /* MainShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6C82B29A3940083EA04 /* MainShip.swift */; };
 		3CBBE6CB2B29E3C60083EA04 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6CA2B29E3C60083EA04 /* Background.swift */; };
-		3CCB08942B2A4DE8002BC79C /* Ship.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CCB08932B2A4DE8002BC79C /* Ship.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,9 @@
 		3C2878A92B2CFD9800AE553E /* Scout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scout.swift; sourceTree = "<group>"; };
 		3C2878AB2B2CFE1C00AE553E /* Frigate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frigate.swift; sourceTree = "<group>"; };
 		3C2878AF2B2CFED300AE553E /* Dreadnought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dreadnought.swift; sourceTree = "<group>"; };
+		3C82EBFE2B304D87002A236A /* EnergyBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyBullet.swift; sourceTree = "<group>"; };
+		3C82EC002B304DAB002A236A /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
+		3C82EC022B305309002A236A /* Animate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animate.swift; sourceTree = "<group>"; };
 		3CBBE6AE2B29A2980083EA04 /* SpaceShooter.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SpaceShooter.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CBBE6B12B29A2980083EA04 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3CBBE6B32B29A2980083EA04 /* GameScene.sks */ = {isa = PBXFileReference; lastKnownFileType = file.sks; path = GameScene.sks; sourceTree = "<group>"; };
@@ -42,7 +47,6 @@
 		3CBBE6C12B29A2990083EA04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CBBE6C82B29A3940083EA04 /* MainShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShip.swift; sourceTree = "<group>"; };
 		3CBBE6CA2B29E3C60083EA04 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
-		3CCB08932B2A4DE8002BC79C /* Ship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ship.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,9 +75,18 @@
 			isa = PBXGroup;
 			children = (
 				3C2878A72B2CF98400AE553E /* Enemies.swift */,
-				3CCB08932B2A4DE8002BC79C /* Ship.swift */,
+				3C82EC002B304DAB002A236A /* Bullet.swift */,
+				3C82EC022B305309002A236A /* Animate.swift */,
 			);
 			path = Protocol;
+			sourceTree = "<group>";
+		};
+		3C82EBFD2B304D6F002A236A /* Bullet */ = {
+			isa = PBXGroup;
+			children = (
+				3C82EBFE2B304D87002A236A /* EnergyBullet.swift */,
+			);
+			path = Bullet;
 			sourceTree = "<group>";
 		};
 		3CBBE6A52B29A2980083EA04 = {
@@ -95,6 +108,7 @@
 		3CBBE6B02B29A2980083EA04 /* SpaceShooter */ = {
 			isa = PBXGroup;
 			children = (
+				3C82EBFD2B304D6F002A236A /* Bullet */,
 				3C2878B12B2D01A400AE553E /* Protocol */,
 				3C2878A42B2C9D6300AE553E /* Enemies */,
 				3CBBE6B12B29A2980083EA04 /* AppDelegate.swift */,
@@ -184,10 +198,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3CBBE6B82B29A2980083EA04 /* GameScene.swift in Sources */,
+				3C82EBFF2B304D87002A236A /* EnergyBullet.swift in Sources */,
 				3C2878B02B2CFED300AE553E /* Dreadnought.swift in Sources */,
+				3C82EC012B304DAB002A236A /* Bullet.swift in Sources */,
 				3C2878AC2B2CFE1C00AE553E /* Frigate.swift in Sources */,
+				3C82EC032B305309002A236A /* Animate.swift in Sources */,
 				3C2878A62B2C9D7600AE553E /* Fighter.swift in Sources */,
-				3CCB08942B2A4DE8002BC79C /* Ship.swift in Sources */,
 				3CBBE6BA2B29A2980083EA04 /* GameViewController.swift in Sources */,
 				3C2878A82B2CF98400AE553E /* Enemies.swift in Sources */,
 				3CBBE6C92B29A3940083EA04 /* MainShip.swift in Sources */,

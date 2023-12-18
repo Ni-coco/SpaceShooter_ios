@@ -9,10 +9,8 @@ import SpriteKit
 
 protocol Enemies: AnyObject {
     
-    var ship: SKSpriteNode! { get set }
-    var engine: SKSpriteNode! { get set }
-    var destruction: SKSpriteNode! { get set }
-    
+    var spriteList: [SKSpriteNode] { get set }
+    var health: Int { get set }
     var viewSize: CGRect { get set }
     var moving: CGPoint { get set }
     var shipSize: CGSize { get set }
@@ -22,13 +20,16 @@ protocol Enemies: AnyObject {
     func generateDestination() -> CGPoint
     func generateSpawn() -> CGPoint
     func checkSize() -> Bool
+    func shoot() -> [Bullet]
+    func getHealth() -> Int
 }
 
 extension Enemies {
 
     func updateMovement() {
-        let deltaX: CGFloat = moving.x - ship.position.x
-        let deltaY: CGFloat = moving.y - ship.position.y
+        
+        let deltaX: CGFloat = moving.x - spriteList[0].position.x
+        let deltaY: CGFloat = moving.y - spriteList[0].position.y
         let distance: CGFloat = sqrt(deltaX * deltaX + deltaY * deltaY)
         
         if distance < 1.0 {
@@ -38,9 +39,9 @@ extension Enemies {
         let directionX = deltaX / distance
         let directionY = deltaY / distance
         
-        ship.position = CGPoint(x: ship.position.x + directionX * shipSpeed, y: ship.position.y + directionY * shipSpeed)
-        engine.position = CGPoint(x: engine.position.x + directionX * shipSpeed, y: engine.position.y + directionY * shipSpeed)
-        destruction.position = CGPoint(x: destruction.position.x + directionX * shipSpeed, y: destruction.position.y + directionY * shipSpeed)
+        for sprite in spriteList {
+            sprite.position = CGPoint(x: sprite.position.x + directionX * shipSpeed, y: sprite.position.y + directionY * shipSpeed)
+        }
     }
     
     func generateSpawn() -> CGPoint {
@@ -49,9 +50,13 @@ extension Enemies {
             return CGPoint()
         }
         
-        let x = CGFloat(Float.random(in: Float(-(viewSize.width / 2) + shipSize.width)...Float((viewSize.width / 2) - shipSize.width)))
-        let y = CGFloat((viewSize.height / 2) + shipSize.height)
+//        let x = CGFloat(Float.random(in: Float(-(viewSize.width / 2) + shipSize.width)...Float((viewSize.width / 2) - shipSize.width)))
+//        let y = CGFloat((viewSize.height / 2) + shipSize.height)
+        let x = 0
+        let y = 0
         return CGPoint(x: x, y: y)
+        
+
     }
 
     func generateDestination() -> CGPoint {
@@ -67,5 +72,9 @@ extension Enemies {
     
     func checkSize() -> Bool {
         return (-(viewSize.width / 2) + shipSize.width > (viewSize.width / 2) - shipSize.width || -60 > (viewSize.height / 2) - shipSize.height)
+    }
+    
+    func getHealth() -> Int {
+        return health
     }
 }

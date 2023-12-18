@@ -42,13 +42,13 @@ class Background: SKNode {
     }
 
     func updateBackground() {
-        bg1.position.y -= 1
-        bg2.position.y -= 1
+        bg1.position.y -= 0.7
+        bg2.position.y -= 0.7
     
         if (bg1.position.y <= -bg1.size.height) {
-            bg1.position.y = bg1.size.height
+            bg1.position.y = bg1.size.height - 1
         } else if (bg2.position.y <= -bg2.size.height) {
-            bg2.position.y = bg1.size.height
+            bg2.position.y = bg1.size.height - 1
         }
     }
     

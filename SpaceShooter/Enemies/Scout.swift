@@ -7,19 +7,21 @@
 
 import SpriteKit
 
-class Scout: SKNode, Ship, Enemies {
+class Scout: SKNode, Animate, Enemies {
     
     var ship: SKSpriteNode!
     var engine: SKSpriteNode!
     var destruction: SKSpriteNode!
     
     //Enemies protocol
+    var spriteList: [SKSpriteNode] = []
     var viewSize: CGRect
     var spawn: CGPoint = CGPoint()
     var moving: CGPoint = CGPoint()
     var shipSize: CGSize = CGSize()
     var scale: CGFloat = 0
     var shipSpeed: CGFloat = 1.4
+    var health: Int = 5
 
     init(viewSize: CGRect) {
         
@@ -55,6 +57,10 @@ class Scout: SKNode, Ship, Enemies {
         setFirstSprite(sprite: ship, spriteSheet: SKTexture(imageNamed: "ScoutWeapon"), spriteWidth: 64.0)
         animateSprite(sprite: engine, spriteSheet: SKTexture(imageNamed: "ScoutEngine"), duration: 0.15, spriteWidth: 64.0)
         
+        spriteList.append(ship)
+        spriteList.append(engine)
+        spriteList.append(destruction)
+        
         addChild(ship)
         addChild(engine)
         addChild(destruction)
@@ -62,5 +68,10 @@ class Scout: SKNode, Ship, Enemies {
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    func shoot() -> [Bullet] {
+        let bullets: [Bullet] = []  // Initialize the array
+        return bullets
     }
 }

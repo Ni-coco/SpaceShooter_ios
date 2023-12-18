@@ -8,6 +8,9 @@
 import SpriteKit
 
 protocol Animate {
+    func animateSprite(sprite: SKSpriteNode, spriteSheet: SKTexture, duration: TimeInterval, spriteWidth: CGFloat)
+    func setFirstSprite(sprite: SKSpriteNode, spriteSheet: SKTexture, spriteWidth: CGFloat)
+    func getScale(sceneSize: CGRect) -> CGFloat
 }
 
 extension Animate {

@@ -14,7 +14,7 @@ extension CGPoint {
     }
 }
 
-class MainShip: SKNode, Ship {
+class MainShip: SKNode, Animate {
     
     let ship: SKSpriteNode!
     let engine: SKSpriteNode!
