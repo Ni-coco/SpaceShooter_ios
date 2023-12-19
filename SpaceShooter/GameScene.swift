@@ -33,22 +33,22 @@ class GameScene: SKScene {
 
         player = MainShip(viewSize: viewSize)
         ui = DisplayUI(viewSize: viewSize)
-//        fighter = Fighter(viewSize: viewSize)
+        fighter = Fighter(viewSize: viewSize)
 //        scout = Scout(viewSize: viewSize)
 //        frigate = Frigate(viewSize: viewSize)
-        dreadnought = Dreadnought(viewSize: viewSize)
+//        dreadnought = Dreadnought(viewSize: viewSize)
         
         addChild(player!)
         addChild(ui!)
-//        addChild(fighter!)
+        addChild(fighter!)
 //        addChild(scout!)
 //        addChild(frigate!)
-        addChild(dreadnought!)
+//        addChild(dreadnought!)
         
-//        enemies.append(fighter!)
+        enemies.append(fighter!)
 //        enemies.append(scout!)
 //        enemies.append(frigate!)
-        enemies.append(dreadnought!)
+//        enemies.append(dreadnought!)
     }
     
     func addBackground() {
@@ -112,17 +112,11 @@ class GameScene: SKScene {
     override func update(_ currentTime: TimeInterval) {
         background.updateBackground()
         updatePlayer()
+        updateEnemies()
     }
     
     func updatePlayer() {
         player!.moveShip()
-        updatePlayerShoot()
-        updateEnemies()
-    }
-    
-    func updatePlayerShoot() {
-        var bulletsToRemove = [SKSpriteNode]()
-
         if !player!.isShooting {
             let bulletsToAdd = player!.shoot()
             for bullet in bulletsToAdd {
@@ -130,18 +124,14 @@ class GameScene: SKScene {
                 playerBullets.append(bullet)
             }
         }
-                
-        for bullet in playerBullets {
-            bullet.position.y += 2
-            if bullet.position.y > viewSize.height / 2 {
-                bulletsToRemove.append(bullet)
-            }
-        }
-
-        for bullet in bulletsToRemove {
-            bullet.removeFromParent()
-            if let index = playerBullets.firstIndex(of: bullet) {
-                playerBullets.remove(at: index)
+        
+        playerBullets.removeAll() { bullet in
+            if isOut(position: bullet.position) {
+                bullet.removeFromParent()
+                return true
+            } else {
+                bullet.position.y += 2
+                return false
             }
         }
     }
@@ -157,8 +147,24 @@ class GameScene: SKScene {
                 }
             }
         }
-        for bullet in enemiesBullets {
-            bullet.updateMovement()
+        
+        enemiesBullets.removeAll { bullet in
+            if isOut(position: bullet.bulletSprite.position) {
+                bullet.bulletSprite.removeFromParent()
+                return true // Remove this bullet from the array
+            } else {
+                bullet.updateMovement()
+                return false // Keep this bullet in the array
+            }
         }
+    }
+    
+    func isOut(position: CGPoint) -> Bool {
+        if position.x > viewSize.width / 2 || position.x < -(viewSize.width / 2) {
+            return true
+        } else if position.y > viewSize.height / 2 || position.y < -(viewSize.height / 2) {
+            return true
+        }
+        return false
     }
 }

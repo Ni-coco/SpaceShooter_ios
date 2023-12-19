@@ -9,6 +9,7 @@ import SpriteKit
 
 protocol Bullet: AnyObject {
     var bulletSprite: SKSpriteNode! { get set }
+    
     func updateMovement()
 }
 

@@ -9,6 +9,8 @@ import SpriteKit
 
 class Fighter: SKNode, Animate, Enemies {
     
+    var canShoot: Bool = true
+
     var ship: SKSpriteNode!
     var engine: SKSpriteNode!
     var destruction: SKSpriteNode!
@@ -20,7 +22,7 @@ class Fighter: SKNode, Animate, Enemies {
     var moving: CGPoint = CGPoint()
     var shipSize: CGSize = CGSize()
     var scale: CGFloat = 0
-    var shipSpeed: CGFloat = 1.2
+    var shipSpeed: CGFloat = 1
     var health: Int = 5
     
     init(viewSize: CGRect) {
@@ -71,7 +73,29 @@ class Fighter: SKNode, Animate, Enemies {
     }
     
     func shoot() -> [Bullet] {
-        let bullets: [Bullet] = []  // Initialize the array
-        return bullets
+        if canShoot && getHealth() > 0 && Int(arc4random_uniform(250)) == 0 {
+            return rocketShoot()
+        }
+        return []
+    }
+    
+    func rocketShoot() -> [Bullet] {
+        animateOnce(sprite: ship, spriteSheet: SKTexture(imageNamed: "FighterWeapon"), duration: 0.15, spriteWidth: 64)
+        canShoot = false
+        
+        var xPosition: CGFloat = ship.position.x - 11
+        var yPosition: CGFloat = ship.position.y
+        
+        var bulletsToAdd: [Bullet] = []
+        for _ in 0..<2 {
+            let rocketBullet = RocketBullet(spawn: CGPoint(x: xPosition, y: yPosition), scale: scale)
+            bulletsToAdd.append(rocketBullet)
+            xPosition += 23
+            yPosition += 5
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.canShoot = true
+        }
+        return bulletsToAdd
     }
 }

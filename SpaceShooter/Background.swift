@@ -30,7 +30,6 @@ class Background: SKNode {
     
     func scaleToSceneSize() {
         if let scene = scene {
-            // Calculate scale based on the scene's size
             let scaleX = scene.size.width / bg1.size.width
             let scaleY = scene.size.height / bg1.size.height
             bg1.setScale(max(scaleX, scaleY))
@@ -42,13 +41,13 @@ class Background: SKNode {
     }
 
     func updateBackground() {
-        bg1.position.y -= 0.7
-        bg2.position.y -= 0.7
+        bg1.position.y -= 1
+        bg2.position.y -= 1
     
         if (bg1.position.y <= -bg1.size.height) {
-            bg1.position.y = bg1.size.height - 1
+            bg1.position.y = bg1.size.height
         } else if (bg2.position.y <= -bg2.size.height) {
-            bg2.position.y = bg1.size.height - 1
+            bg2.position.y = bg1.size.height
         }
     }
     

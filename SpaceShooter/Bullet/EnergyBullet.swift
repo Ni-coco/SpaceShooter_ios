@@ -33,7 +33,7 @@ class EnergyBullet : Bullet, Animate {
     
     func updateMovement() {
         if xMove == 0 && yMove == 0 {
-            yMove = 1
+            yMove = 1.2
         }
         
         let xPosition = bulletSprite.position.x
@@ -42,25 +42,25 @@ class EnergyBullet : Bullet, Animate {
         if scenario == 0 {
             switch pattern {
             case "left":
-                bulletSprite.position.x = xPosition - 1
+                bulletSprite.position.x = xPosition - 1.2
             case "up":
-                bulletSprite.position.y = yPosition - 1
+                bulletSprite.position.y = yPosition - 1.2
             case "right":
-                bulletSprite.position.x = xPosition + 1
+                bulletSprite.position.x = xPosition + 1.2
             case "down":
-                bulletSprite.position.y = yPosition + 1
+                bulletSprite.position.y = yPosition + 1.2
             case "left up":
-                bulletSprite.position.x = xPosition - 1
-                bulletSprite.position.y = yPosition - 1
+                bulletSprite.position.x = xPosition - 1.2
+                bulletSprite.position.y = yPosition - 1.2
             case "left down":
-                bulletSprite.position.x = xPosition - 1
-                bulletSprite.position.y = yPosition + 1
+                bulletSprite.position.x = xPosition - 1.2
+                bulletSprite.position.y = yPosition + 1.2
             case "right up":
-                bulletSprite.position.x = xPosition + 1
-                bulletSprite.position.y = yPosition - 1
+                bulletSprite.position.x = xPosition + 1.2
+                bulletSprite.position.y = yPosition - 1.2
             case "right down":
-                bulletSprite.position.x = xPosition + 1
-                bulletSprite.position.y = yPosition + 1
+                bulletSprite.position.x = xPosition + 1.2
+                bulletSprite.position.y = yPosition + 1.2
             default:
                 return
             }
@@ -68,19 +68,19 @@ class EnergyBullet : Bullet, Animate {
         else if scenario == 1 {
             switch pattern {
             case "left", "up", "right", "down":
-                bulletSprite.position.y = yPosition - 1
+                bulletSprite.position.y = yPosition - 1.2
             case "left up":
-                bulletSprite.position.x = xPosition - 1
-                bulletSprite.position.y = yPosition - 1
+                bulletSprite.position.x = xPosition - 1.2
+                bulletSprite.position.y = yPosition - 1.2
             case "left down":
-                bulletSprite.position.x = xPosition - 1
-                bulletSprite.position.y = yPosition + 1
+                bulletSprite.position.x = xPosition - 1.2
+                bulletSprite.position.y = yPosition + 1.2
             case "right up":
-                bulletSprite.position.x = xPosition + 1
-                bulletSprite.position.y = yPosition - 1
+                bulletSprite.position.x = xPosition + 1.2
+                bulletSprite.position.y = yPosition - 1.2
             case "right down":
-                bulletSprite.position.x = xPosition + 1
-                bulletSprite.position.y = yPosition + 1
+                bulletSprite.position.x = xPosition + 1.2
+                bulletSprite.position.y = yPosition + 1.2
             default:
                 return
             }

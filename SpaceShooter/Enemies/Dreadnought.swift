@@ -10,6 +10,7 @@ import SpriteKit
 class Dreadnought: SKNode, Animate, Enemies {
     
     var canShoot: Bool = true
+    
     var ship: SKSpriteNode!
     var weapon: SKSpriteNode!
     var engine: SKSpriteNode!
