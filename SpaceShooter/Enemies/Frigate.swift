@@ -9,6 +9,8 @@ import SpriteKit
 
 class Frigate: SKNode, Animate, Enemies {
     
+    var canShoot: Bool = true
+    
     var ship: SKSpriteNode!
     var engine: SKSpriteNode!
     var destruction: SKSpriteNode!
@@ -71,7 +73,33 @@ class Frigate: SKNode, Animate, Enemies {
     }
     
     func shoot() -> [Bullet] {
-        let bullets: [Bullet] = []  // Initialize the array
-        return bullets
+        if canShoot && getHealth() > 0 && Int(arc4random_uniform(200)) == 0 {
+            return boltBullet()
+        }
+        return []
+    }
+    
+    func boltBullet() -> [Bullet] {
+        animateOnce(sprite: ship, spriteSheet: SKTexture(imageNamed: "FrigateWeapon"), duration: 0.10, spriteWidth: 64)
+        canShoot = false
+        
+        var xPosition: CGFloat = ship.position.x - 15
+        var yPosition: CGFloat = ship.position.y
+        
+        var bulletsToAdd: [Bullet] = []
+        
+        for _ in 0..<2 {
+            for _ in 0..<2 {
+                let boltbullet = BoltBullet(spawn: CGPoint(x: xPosition, y: yPosition), scale: scale)
+                bulletsToAdd.append(boltbullet)
+                xPosition += 3
+            }
+            xPosition += 20
+            yPosition += 3
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            self.canShoot = true
+        }
+        return bulletsToAdd
     }
 }

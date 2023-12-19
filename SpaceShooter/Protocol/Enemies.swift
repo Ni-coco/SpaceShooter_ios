@@ -52,8 +52,6 @@ extension Enemies {
         
         let x = CGFloat(Float.random(in: Float(-(viewSize.width / 2) + shipSize.width)...Float((viewSize.width / 2) - shipSize.width)))
         let y = CGFloat((viewSize.height / 2) + shipSize.height)
-//        let x = 0
-//        let y = 0
         return CGPoint(x: x, y: y)
     }
 

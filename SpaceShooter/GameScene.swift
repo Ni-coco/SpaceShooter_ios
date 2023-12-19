@@ -34,21 +34,21 @@ class GameScene: SKScene {
         player = MainShip(viewSize: viewSize)
         ui = DisplayUI(viewSize: viewSize)
         fighter = Fighter(viewSize: viewSize)
-//        scout = Scout(viewSize: viewSize)
-//        frigate = Frigate(viewSize: viewSize)
-//        dreadnought = Dreadnought(viewSize: viewSize)
+        scout = Scout(viewSize: viewSize)
+        frigate = Frigate(viewSize: viewSize)
+        dreadnought = Dreadnought(viewSize: viewSize)
         
         addChild(player!)
         addChild(ui!)
         addChild(fighter!)
-//        addChild(scout!)
-//        addChild(frigate!)
-//        addChild(dreadnought!)
+        addChild(scout!)
+        addChild(frigate!)
+        addChild(dreadnought!)
         
         enemies.append(fighter!)
-//        enemies.append(scout!)
-//        enemies.append(frigate!)
-//        enemies.append(dreadnought!)
+        enemies.append(scout!)
+        enemies.append(frigate!)
+        enemies.append(dreadnought!)
     }
     
     func addBackground() {

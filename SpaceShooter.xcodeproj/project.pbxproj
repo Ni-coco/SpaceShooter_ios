@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3C10C3042B31F117007FC3B8 /* RocketBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C10C3032B31F117007FC3B8 /* RocketBullet.swift */; };
+		3C10C3062B32184E007FC3B8 /* BoltBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C10C3052B32184E007FC3B8 /* BoltBullet.swift */; };
 		3C17D8CD2B2C617100359AD7 /* DisplayUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17D8CC2B2C617100359AD7 /* DisplayUI.swift */; };
 		3C2878A62B2C9D7600AE553E /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878A52B2C9D7600AE553E /* Fighter.swift */; };
 		3C2878A82B2CF98400AE553E /* Enemies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878A72B2CF98400AE553E /* Enemies.swift */; };
@@ -30,6 +31,7 @@
 
 /* Begin PBXFileReference section */
 		3C10C3032B31F117007FC3B8 /* RocketBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketBullet.swift; sourceTree = "<group>"; };
+		3C10C3052B32184E007FC3B8 /* BoltBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoltBullet.swift; sourceTree = "<group>"; };
 		3C17D8CC2B2C617100359AD7 /* DisplayUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUI.swift; sourceTree = "<group>"; };
 		3C2878A52B2C9D7600AE553E /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
 		3C2878A72B2CF98400AE553E /* Enemies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemies.swift; sourceTree = "<group>"; };
@@ -88,6 +90,7 @@
 			children = (
 				3C82EBFE2B304D87002A236A /* EnergyBullet.swift */,
 				3C10C3032B31F117007FC3B8 /* RocketBullet.swift */,
+				3C10C3052B32184E007FC3B8 /* BoltBullet.swift */,
 			);
 			path = Bullet;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				3CBBE6B82B29A2980083EA04 /* GameScene.swift in Sources */,
 				3C82EBFF2B304D87002A236A /* EnergyBullet.swift in Sources */,
 				3C2878B02B2CFED300AE553E /* Dreadnought.swift in Sources */,
+				3C10C3062B32184E007FC3B8 /* BoltBullet.swift in Sources */,
 				3C82EC012B304DAB002A236A /* Bullet.swift in Sources */,
 				3C2878AC2B2CFE1C00AE553E /* Frigate.swift in Sources */,
 				3C82EC032B305309002A236A /* Animate.swift in Sources */,

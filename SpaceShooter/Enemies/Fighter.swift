@@ -73,7 +73,7 @@ class Fighter: SKNode, Animate, Enemies {
     }
     
     func shoot() -> [Bullet] {
-        if canShoot && getHealth() > 0 && Int(arc4random_uniform(250)) == 0 {
+        if canShoot && getHealth() > 0 && Int(arc4random_uniform(200)) == 0 {
             return rocketShoot()
         }
         return []
