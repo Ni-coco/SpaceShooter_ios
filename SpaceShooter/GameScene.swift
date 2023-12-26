@@ -8,7 +8,7 @@
 import SpriteKit
 import GameplayKit
 
-class GameScene: SKScene {
+class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var viewSize: CGRect = CGRect()
     
@@ -21,11 +21,12 @@ class GameScene: SKScene {
     var frigate: Frigate?
     var dreadnought: Dreadnought?
     
-    var playerBullets = [SKSpriteNode]()
+    var playerBullets = [Bullet]()
     var enemiesBullets = [Bullet]()
     var enemies = [Enemies]()
             
     override func didMove(to view: SKView) {
+        self.physicsWorld.contactDelegate = self
         
         viewSize = view.frame
         
@@ -39,16 +40,17 @@ class GameScene: SKScene {
         dreadnought = Dreadnought(viewSize: viewSize)
         
         addChild(player!)
-        addChild(ui!)
         addChild(fighter!)
         addChild(scout!)
         addChild(frigate!)
         addChild(dreadnought!)
-        
+                
         enemies.append(fighter!)
         enemies.append(scout!)
         enemies.append(frigate!)
         enemies.append(dreadnought!)
+    
+        addChild(ui!)
     }
     
     func addBackground() {
@@ -120,24 +122,29 @@ class GameScene: SKScene {
         if !player!.isShooting {
             let bulletsToAdd = player!.shoot()
             for bullet in bulletsToAdd {
-                addChild(bullet)
+                addChild(bullet.bulletSprite)
                 playerBullets.append(bullet)
             }
         }
         
         playerBullets.removeAll() { bullet in
-            if isOut(position: bullet.position) {
-                bullet.removeFromParent()
+            if isOut(position: bullet.bulletSprite.position) {
+                bullet.bulletSprite.removeFromParent()
                 return true
-            } else {
-                bullet.position.y += 2
-                return false
             }
+            bullet.bulletSprite.position.y += 2
+            return false
         }
     }
     
     func updateEnemies() {
-        for enemy in enemies {
+        enemies.removeAll { enemy in
+            if enemy.getHealth() < 1 {
+                for sprite in enemy.spriteList {
+                    sprite.removeFromParent()
+                }
+                return true
+            }
             enemy.updateMovement()
             let bullets = enemy.shoot()
             if !bullets.isEmpty {
@@ -146,16 +153,16 @@ class GameScene: SKScene {
                     addChild(bullet.bulletSprite)
                 }
             }
+            return false
         }
         
         enemiesBullets.removeAll { bullet in
             if isOut(position: bullet.bulletSprite.position) {
                 bullet.bulletSprite.removeFromParent()
                 return true // Remove this bullet from the array
-            } else {
-                bullet.updateMovement()
-                return false // Keep this bullet in the array
             }
+            bullet.updateMovement()
+            return false // Keep this bullet in the array
         }
     }
     
@@ -166,5 +173,49 @@ class GameScene: SKScene {
             return true
         }
         return false
+    }
+    
+    func didBegin(_ contact: SKPhysicsContact) {
+        var firstBody = SKPhysicsBody()
+        var secondBody = SKPhysicsBody()
+        
+        if contact.bodyA.node?.name == "player" {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else if contact.bodyA.node?.name == "enemy" {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+        
+        if firstBody.node?.name == "player" && secondBody.node?.name == "enemy" {
+            player!.takeDamage()
+            ui!.setLifeUI(index: player!.getHealth())
+        } else if firstBody.node?.name == "player" && secondBody.node?.name == "enemyBullet" {
+            player!.takeDamage()
+            ui!.setLifeUI(index: player!.getHealth())
+            enemiesBullets.removeAll() { bullet in
+                if bullet.bulletSprite == secondBody.node {
+                    bullet.targetHit()
+                    return true
+                }
+                return false
+            }
+        } else if firstBody.node?.name == "enemy" && secondBody.node?.name == "playerBullet" {
+            for enemy in enemies {
+                if enemy.spriteList[0] == firstBody.node {
+                    enemy.takeDamage(damage: 1)
+                }
+            }
+            playerBullets.removeAll() { bullet in
+                if bullet.bulletSprite == secondBody.node {
+                    bullet.targetHit()
+                    return true
+                }
+                return false
+            }
+        }
     }
 }

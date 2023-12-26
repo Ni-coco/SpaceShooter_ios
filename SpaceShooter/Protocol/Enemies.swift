@@ -16,12 +16,14 @@ protocol Enemies: AnyObject {
     var shipSize: CGSize { get set }
     var shipSpeed: CGFloat { get set }
     
+    func hide()
     func updateMovement()
     func generateDestination() -> CGPoint
     func generateSpawn() -> CGPoint
     func checkSize() -> Bool
     func shoot() -> [Bullet]
     func getHealth() -> Int
+    func takeDamage(damage: Int)
 }
 
 extension Enemies {
@@ -72,5 +74,13 @@ extension Enemies {
     
     func getHealth() -> Int {
         return health
+    }
+    
+    func takeDamage(damage: Int) {
+        self.health -= damage
+    }
+    
+    func hide() {
+        spriteList[0].isHidden = true
     }
 }

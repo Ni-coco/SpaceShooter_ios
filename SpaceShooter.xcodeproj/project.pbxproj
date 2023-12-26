@@ -15,6 +15,10 @@
 		3C2878AA2B2CFD9800AE553E /* Scout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878A92B2CFD9800AE553E /* Scout.swift */; };
 		3C2878AC2B2CFE1C00AE553E /* Frigate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878AB2B2CFE1C00AE553E /* Frigate.swift */; };
 		3C2878B02B2CFED300AE553E /* Dreadnought.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878AF2B2CFED300AE553E /* Dreadnought.swift */; };
+		3C6BD9AD2B3B1EBF0024A850 /* CanonBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6BD9AC2B3B1EBF0024A850 /* CanonBullet.swift */; };
+		3C6BD9AF2B3B1EDA0024A850 /* SpaceBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6BD9AE2B3B1EDA0024A850 /* SpaceBullet.swift */; };
+		3C6BD9B12B3B1EF50024A850 /* RocketBulletP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6BD9B02B3B1EF50024A850 /* RocketBulletP.swift */; };
+		3C6BD9B32B3B1F010024A850 /* ZapperBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6BD9B22B3B1F010024A850 /* ZapperBullet.swift */; };
 		3C82EBFF2B304D87002A236A /* EnergyBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C82EBFE2B304D87002A236A /* EnergyBullet.swift */; };
 		3C82EC012B304DAB002A236A /* Bullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C82EC002B304DAB002A236A /* Bullet.swift */; };
 		3C82EC032B305309002A236A /* Animate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C82EC022B305309002A236A /* Animate.swift */; };
@@ -38,6 +42,10 @@
 		3C2878A92B2CFD9800AE553E /* Scout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scout.swift; sourceTree = "<group>"; };
 		3C2878AB2B2CFE1C00AE553E /* Frigate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frigate.swift; sourceTree = "<group>"; };
 		3C2878AF2B2CFED300AE553E /* Dreadnought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dreadnought.swift; sourceTree = "<group>"; };
+		3C6BD9AC2B3B1EBF0024A850 /* CanonBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanonBullet.swift; sourceTree = "<group>"; };
+		3C6BD9AE2B3B1EDA0024A850 /* SpaceBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceBullet.swift; sourceTree = "<group>"; };
+		3C6BD9B02B3B1EF50024A850 /* RocketBulletP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketBulletP.swift; sourceTree = "<group>"; };
+		3C6BD9B22B3B1F010024A850 /* ZapperBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZapperBullet.swift; sourceTree = "<group>"; };
 		3C82EBFE2B304D87002A236A /* EnergyBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnergyBullet.swift; sourceTree = "<group>"; };
 		3C82EC002B304DAB002A236A /* Bullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Bullet.swift; sourceTree = "<group>"; };
 		3C82EC022B305309002A236A /* Animate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animate.swift; sourceTree = "<group>"; };
@@ -91,6 +99,10 @@
 				3C82EBFE2B304D87002A236A /* EnergyBullet.swift */,
 				3C10C3032B31F117007FC3B8 /* RocketBullet.swift */,
 				3C10C3052B32184E007FC3B8 /* BoltBullet.swift */,
+				3C6BD9AC2B3B1EBF0024A850 /* CanonBullet.swift */,
+				3C6BD9AE2B3B1EDA0024A850 /* SpaceBullet.swift */,
+				3C6BD9B02B3B1EF50024A850 /* RocketBulletP.swift */,
+				3C6BD9B22B3B1F010024A850 /* ZapperBullet.swift */,
 			);
 			path = Bullet;
 			sourceTree = "<group>";
@@ -205,15 +217,19 @@
 			files = (
 				3C10C3042B31F117007FC3B8 /* RocketBullet.swift in Sources */,
 				3CBBE6B82B29A2980083EA04 /* GameScene.swift in Sources */,
+				3C6BD9AF2B3B1EDA0024A850 /* SpaceBullet.swift in Sources */,
 				3C82EBFF2B304D87002A236A /* EnergyBullet.swift in Sources */,
+				3C6BD9AD2B3B1EBF0024A850 /* CanonBullet.swift in Sources */,
 				3C2878B02B2CFED300AE553E /* Dreadnought.swift in Sources */,
 				3C10C3062B32184E007FC3B8 /* BoltBullet.swift in Sources */,
 				3C82EC012B304DAB002A236A /* Bullet.swift in Sources */,
 				3C2878AC2B2CFE1C00AE553E /* Frigate.swift in Sources */,
 				3C82EC032B305309002A236A /* Animate.swift in Sources */,
 				3C2878A62B2C9D7600AE553E /* Fighter.swift in Sources */,
+				3C6BD9B32B3B1F010024A850 /* ZapperBullet.swift in Sources */,
 				3CBBE6BA2B29A2980083EA04 /* GameViewController.swift in Sources */,
 				3C2878A82B2CF98400AE553E /* Enemies.swift in Sources */,
+				3C6BD9B12B3B1EF50024A850 /* RocketBulletP.swift in Sources */,
 				3CBBE6C92B29A3940083EA04 /* MainShip.swift in Sources */,
 				3CBBE6B22B29A2980083EA04 /* AppDelegate.swift in Sources */,
 				3C17D8CD2B2C617100359AD7 /* DisplayUI.swift in Sources */,

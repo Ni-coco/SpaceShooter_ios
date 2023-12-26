@@ -44,7 +44,13 @@ class Fighter: SKNode, Animate, Enemies {
         ship.zPosition = 14
         ship.setScale(scale)
         ship.zRotation = .pi
-        
+        ship.physicsBody = SKPhysicsBody(circleOfRadius: 12)
+        ship.physicsBody?.affectedByGravity = false
+        ship.physicsBody?.collisionBitMask = 0
+        ship.physicsBody?.categoryBitMask = 2
+        ship.physicsBody?.contactTestBitMask = 1
+        ship.name = "enemy"
+
         engine.position = CGPoint(x: spawn.x, y: spawn.y)
         engine.zPosition = 14
         engine.setScale(scale)

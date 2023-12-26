@@ -28,6 +28,10 @@ class EnergyBullet : Bullet, Animate {
         bulletSprite.position = CGPoint(x: spawn.x, y: spawn.y)
         bulletSprite.zPosition = 106
         bulletSprite.setScale(scale / 1.42)
+        bulletSprite.physicsBody = SKPhysicsBody(circleOfRadius: 6)
+        bulletSprite.physicsBody?.affectedByGravity = false
+        bulletSprite.physicsBody?.collisionBitMask = 0
+        bulletSprite.name = "enemyBullet"
         animateSprite(sprite: bulletSprite, spriteSheet: SKTexture(imageNamed: "Ball"), duration: 0.15, spriteWidth: 32)
     }
     

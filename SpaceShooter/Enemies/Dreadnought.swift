@@ -46,6 +46,12 @@ class Dreadnought: SKNode, Animate, Enemies {
         ship.zPosition = 11
         ship.setScale(scale * 1.2)
         ship.zRotation = .pi
+        ship.physicsBody = SKPhysicsBody(circleOfRadius: 45)
+        ship.physicsBody?.affectedByGravity = false
+        ship.physicsBody?.collisionBitMask = 0
+        ship.physicsBody?.categoryBitMask = 2
+        ship.physicsBody?.contactTestBitMask = 1
+        ship.name = "enemy"
         
         weapon.anchorPoint = CGPointMake(0.5, 0);
         weapon.position = CGPoint(x: spawn.x, y: spawn.y - 38)

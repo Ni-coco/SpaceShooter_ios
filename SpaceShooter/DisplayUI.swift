@@ -10,8 +10,8 @@ import UIKit
 
 class DisplayUI: SKNode {
     
-    let lifeUI: SKSpriteNode
-    let shieldUI: SKSpriteNode
+    var lifeUI: SKSpriteNode
+    var shieldUI: SKSpriteNode
     
     let viewSize: CGRect
     var scale: CGFloat = 0
@@ -50,4 +50,18 @@ class DisplayUI: SKNode {
         let screenHeight = max(viewSize.height, viewSize.width)
         return(screenHeight / 1055)
     }
+    
+    func setLifeUI(index: Int) {
+        if index >= 0 {
+            lifeUI.texture = SKTexture(imageNamed: "health\(index)")
+        }
+    }
+    
+    func setShieldUI(index: Int) {
+        if index >= 0 {
+            shieldUI.texture = SKTexture(imageNamed: "shield\(index)")
+        }
+    }
 }
+
+
