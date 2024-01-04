@@ -34,7 +34,7 @@ extension Bullet {
             textures.append(texture)
         }
         
-        let animateAction = SKAction.animate(with: textures, timePerFrame: 0.2)
+        let animateAction = SKAction.animate(with: textures, timePerFrame: 0.1)
         let completionAction = SKAction.run {
             self.bulletSprite.removeFromParent()
         }

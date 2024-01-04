@@ -108,4 +108,12 @@ class Frigate: SKNode, Animate, Enemies {
         }
         return bulletsToAdd
     }
+    
+    func isKilled() {
+        for i in 0..<spriteList.count - 1 {
+            spriteList[i].removeFromParent()
+        }
+        destruction.isHidden = false
+        animateDeath(sprite: destruction, spriteSheet: SKTexture(imageNamed: "FrigateDestruction"), duration: 0.1, spriteWidth: 64)
+    }
 }

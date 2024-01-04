@@ -170,4 +170,12 @@ class Dreadnought: SKNode, Animate, Enemies {
         }
         return bulletsToAdd
     }
+    
+    func isKilled() {
+        for i in 0..<spriteList.count - 1 {
+            spriteList[i].removeFromParent()
+        }
+        destruction.isHidden = false
+        animateDeath(sprite: destruction, spriteSheet: SKTexture(imageNamed: "DreadnoughtDestruction"), duration: 0.1, spriteWidth: 128)
+    }
 }

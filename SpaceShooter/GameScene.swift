@@ -140,9 +140,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func updateEnemies() {
         enemies.removeAll { enemy in
             if enemy.getHealth() < 1 {
-                for sprite in enemy.spriteList {
-                    sprite.removeFromParent()
-                }
+                enemy.isKilled()
                 return true
             }
             enemy.updateMovement()

@@ -7,7 +7,7 @@
 
 import SpriteKit
 
-protocol Enemies: AnyObject {
+protocol Enemies: AnyObject, Animate {
     
     var spriteList: [SKSpriteNode] { get set }
     var health: Int { get set }
@@ -16,7 +16,6 @@ protocol Enemies: AnyObject {
     var shipSize: CGSize { get set }
     var shipSpeed: CGFloat { get set }
     
-    func hide()
     func updateMovement()
     func generateDestination() -> CGPoint
     func generateSpawn() -> CGPoint
@@ -24,6 +23,7 @@ protocol Enemies: AnyObject {
     func shoot() -> [Bullet]
     func getHealth() -> Int
     func takeDamage(damage: Int)
+    func isKilled()
 }
 
 extension Enemies {
@@ -78,9 +78,5 @@ extension Enemies {
     
     func takeDamage(damage: Int) {
         self.health -= damage
-    }
-    
-    func hide() {
-        spriteList[0].isHidden = true
     }
 }
