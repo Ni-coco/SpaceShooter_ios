@@ -15,7 +15,9 @@ extension CGPoint {
 }
 
 class MainShip: SKNode, Animate {
-        
+    
+    var sprite: SKNode = SKNode()
+    
     let ship: SKSpriteNode!
     let engine: SKSpriteNode!
     let engineEffect: SKSpriteNode!
@@ -42,6 +44,7 @@ class MainShip: SKNode, Animate {
     var shootSpeed: Double = 2.0
     var shipSpeed: Double = 1.5
     var health = 4
+    var invicible: Bool = false
     
     let viewSize: CGRect
     var scale: CGFloat = 0
@@ -55,7 +58,7 @@ class MainShip: SKNode, Animate {
         engineEffect = SKSpriteNode(texture: SKTexture(imageNamed: engineListsMovement[engineChoice][0]), color: .white, size: CGSize(width: 48, height: 48))
         weapon = SKSpriteNode(texture: SKTexture(imageNamed: weaponList[weaponChoice]), color: .white, size: CGSize(width: 48, height: 48))
         shield = SKSpriteNode(texture: SKTexture(imageNamed: "Shield"), color: .white, size: CGSize(width: 64, height: 64))
-        
+                      
         super.init()
         
         scale = getScale(sceneSize: viewSize)
@@ -91,11 +94,13 @@ class MainShip: SKNode, Animate {
         animateSprite(sprite: engineEffect, spriteSheet: SKTexture(imageNamed: engineListsMovement[engineChoice][0]), duration: 0.15, spriteWidth: 48.0)
         animateSprite(sprite: shield, spriteSheet: SKTexture(imageNamed: "Shield"), duration: 0.15, spriteWidth: 64)
         
-        addChild(ship)
-        addChild(engine)
-        addChild(engineEffect)
-        addChild(weapon)
-        addChild(shield)
+        sprite.addChild(ship)
+        sprite.addChild(engine)
+        sprite.addChild(engineEffect)
+        sprite.addChild(weapon)
+        sprite.addChild(shield)
+        
+        addChild(sprite)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -207,9 +212,24 @@ class MainShip: SKNode, Animate {
     
     func takeDamage() {
         self.health -= 1
+        self.invicible = true
+        
+        let flashTimer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true) { timer in
+            self.sprite.isHidden = !self.sprite.isHidden
+        }
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            flashTimer.invalidate()
+            self.sprite.isHidden = false
+            self.invicible = false
+        }
     }
     
     func getHealth() -> Int {
         return self.health
+    }
+    
+    func isInvicible() -> Bool {
+        return self.invicible
     }
 }

@@ -188,10 +188,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        if firstBody.node?.name == "player" && secondBody.node?.name == "enemy" {
+        if firstBody.node?.name == "player" && secondBody.node?.name == "enemy" && !player!.isInvicible() {
             player!.takeDamage()
             ui!.setLifeUI(index: player!.getHealth())
-        } else if firstBody.node?.name == "player" && secondBody.node?.name == "enemyBullet" {
+        } else if firstBody.node?.name == "player" && secondBody.node?.name == "enemyBullet" && !player!.isInvicible() {
             player!.takeDamage()
             ui!.setLifeUI(index: player!.getHealth())
             enemiesBullets.removeAll() { bullet in
