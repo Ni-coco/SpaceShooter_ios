@@ -44,7 +44,7 @@ class MainShip: SKNode, Animate {
     var shootSpeed: Double = 2.0
     var shipSpeed: Double = 1.5
     var health = 4
-    var invicible: Bool = false
+    var hit: Bool = false
     
     let viewSize: CGRect
     var scale: CGFloat = 0
@@ -212,7 +212,7 @@ class MainShip: SKNode, Animate {
     
     func takeDamage() {
         self.health -= 1
-        self.invicible = true
+        self.hit = true
         
         let flashTimer = Timer.scheduledTimer(withTimeInterval: 0.15, repeats: true) { timer in
             self.sprite.isHidden = !self.sprite.isHidden
@@ -221,7 +221,7 @@ class MainShip: SKNode, Animate {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
             flashTimer.invalidate()
             self.sprite.isHidden = false
-            self.invicible = false
+            self.hit = false
         }
     }
     
@@ -229,7 +229,7 @@ class MainShip: SKNode, Animate {
         return self.health
     }
     
-    func isInvicible() -> Bool {
-        return self.invicible
+    func isHit() -> Bool {
+        return self.hit
     }
 }

@@ -119,7 +119,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func updatePlayer() {
         player!.moveShip()
-        if !player!.isShooting {
+        if !player!.isShooting && !player!.isHit() {
             let bulletsToAdd = player!.shoot()
             for bullet in bulletsToAdd {
                 addChild(bullet.bulletSprite)
@@ -188,10 +188,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        if firstBody.node?.name == "player" && secondBody.node?.name == "enemy" && !player!.isInvicible() {
+        if firstBody.node?.name == "player" && secondBody.node?.name == "enemy" && !player!.isHit() {
             player!.takeDamage()
             ui!.setLifeUI(index: player!.getHealth())
-        } else if firstBody.node?.name == "player" && secondBody.node?.name == "enemyBullet" && !player!.isInvicible() {
+        } else if firstBody.node?.name == "player" && secondBody.node?.name == "enemyBullet" && !player!.isHit() {
             player!.takeDamage()
             ui!.setLifeUI(index: player!.getHealth())
             enemiesBullets.removeAll() { bullet in
