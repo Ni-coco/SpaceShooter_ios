@@ -40,14 +40,14 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         dreadnought = Dreadnought(viewSize: viewSize)
         
         addChild(player!)
-        addChild(fighter!)
-        addChild(scout!)
-        addChild(frigate!)
+//        addChild(fighter!)
+//        addChild(scout!)
+//        addChild(frigate!)
         addChild(dreadnought!)
                 
-        enemies.append(fighter!)
-        enemies.append(scout!)
-        enemies.append(frigate!)
+//        enemies.append(fighter!)
+//        enemies.append(scout!)
+//        enemies.append(frigate!)
         enemies.append(dreadnought!)
     
         addChild(ui!)
@@ -183,25 +183,36 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         } else if contact.bodyA.node?.name == "enemy" {
             firstBody = contact.bodyA
             secondBody = contact.bodyB
+        } else if contact.bodyA.node?.name == "enemyRay" {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
         } else {
             firstBody = contact.bodyB
             secondBody = contact.bodyA
         }
         
-        if firstBody.node?.name == "player" && secondBody.node?.name == "enemy" && !player!.isHit() {
+        if firstBody.node?.name == "player" && !player!.isHit() && (secondBody.node?.name == "enemy" || secondBody.node?.name == "enemyBullet") {
             player!.takeDamage()
             ui!.setLifeUI(index: player!.getHealth())
-        } else if firstBody.node?.name == "player" && secondBody.node?.name == "enemyBullet" && !player!.isHit() {
-            player!.takeDamage()
-            ui!.setLifeUI(index: player!.getHealth())
-            enemiesBullets.removeAll() { bullet in
-                if bullet.bulletSprite == secondBody.node {
-                    bullet.targetHit()
-                    return true
+            if secondBody.node?.name == "enemyBullet" {
+                enemiesBullets.removeAll() { bullet in
+                    if bullet.bulletSprite == secondBody.node {
+                        bullet.targetHit()
+                        return true
+                    }
+                    return false
                 }
-                return false
             }
-        } else if firstBody.node?.name == "enemy" && secondBody.node?.name == "playerBullet" {
+        }
+        else if firstBody.node?.name == "player" && !player!.isHit() && secondBody.node?.name == "enemyRay" {
+            for enemy in enemies {
+                if enemy.spriteList[1] == secondBody.node && enemy.rayIsActive() && !(player!.ship.position.y > enemy.spriteList[1].position.y) {
+                    player!.takeDamage()
+                    ui!.setLifeUI(index: player!.getHealth())
+                }
+            }
+        }
+        else if firstBody.node?.name == "enemy" && secondBody.node?.name == "playerBullet" {
             for enemy in enemies {
                 if enemy.spriteList[0] == firstBody.node {
                     enemy.takeDamage(damage: 1)

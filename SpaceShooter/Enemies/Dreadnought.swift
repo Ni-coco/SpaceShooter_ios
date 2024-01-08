@@ -24,7 +24,8 @@ class Dreadnought: SKNode, Animate, Enemies {
     var shipSize: CGSize = CGSize()
     var scale: CGFloat = 0
     var shipSpeed: CGFloat = 0.6
-    var health: Int = 5
+    var health: Int = 1000
+    var rayActive: Bool = false
 
     init(viewSize: CGRect) {
         
@@ -56,9 +57,14 @@ class Dreadnought: SKNode, Animate, Enemies {
         weapon.anchorPoint = CGPointMake(0.5, 0);
         weapon.position = CGPoint(x: spawn.x, y: spawn.y - 38)
         weapon.zPosition = 12
-        weapon.setScale(scale * 1.2)
         weapon.zRotation = .pi
+        weapon.setScale(scale * 1.2)
         weapon.isHidden = true
+        weapon.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: weapon.size.width / 2, height: weapon.size.height * 2))
+        weapon.physicsBody?.affectedByGravity = false
+        weapon.physicsBody?.allowsRotation = false
+        weapon.physicsBody?.collisionBitMask = 0
+        weapon.name = "enemyRay"
         
         engine.position = CGPoint(x: spawn.x, y: spawn.y)
         engine.zPosition = 10
@@ -127,6 +133,7 @@ class Dreadnought: SKNode, Animate, Enemies {
             let frame = Int(elapsedTime / 0.25)
             if frame != currentFrame && frame == 22 {
                 self.weapon.isHidden = false
+                self.rayActive = true
                 currentFrame = frame
             }
             self.spriteList[0].texture = textures[frame > 33 ? 0 : frame]
@@ -137,6 +144,7 @@ class Dreadnought: SKNode, Animate, Enemies {
             self.setFirstSprite(sprite: self.spriteList[0], spriteSheet: spriteSheet, spriteWidth: 128)
             self.canShoot = true
             self.weapon.isHidden = true
+            self.rayActive = false
         }
         
         let sequence = SKAction.sequence([animateAction, removeAction])
@@ -177,5 +185,9 @@ class Dreadnought: SKNode, Animate, Enemies {
         }
         destruction.isHidden = false
         animateDeath(sprite: destruction, spriteSheet: SKTexture(imageNamed: "DreadnoughtDestruction"), duration: 0.1, spriteWidth: 128)
+    }
+    
+    func rayIsActive() -> Bool {
+        return self.rayActive
     }
 }

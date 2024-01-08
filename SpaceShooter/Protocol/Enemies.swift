@@ -24,6 +24,7 @@ protocol Enemies: AnyObject, Animate {
     func getHealth() -> Int
     func takeDamage(damage: Int)
     func isKilled()
+    func rayIsActive() -> Bool
 }
 
 extension Enemies {
@@ -78,5 +79,9 @@ extension Enemies {
     
     func takeDamage(damage: Int) {
         self.health -= damage
+    }
+    
+    func rayIsActive() -> Bool {
+        return false
     }
 }
