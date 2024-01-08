@@ -191,24 +191,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        if firstBody.node?.name == "player" && !player!.isHit() && (secondBody.node?.name == "enemy" || secondBody.node?.name == "enemyBullet") {
-            player!.takeDamage()
-            ui!.setLifeUI(index: player!.getHealth())
-            if secondBody.node?.name == "enemyBullet" {
-                enemiesBullets.removeAll() { bullet in
-                    if bullet.bulletSprite == secondBody.node {
-                        bullet.targetHit()
-                        return true
+        if firstBody.node?.name == "player" && !player!.isHit() && (secondBody.node?.name == "enemy" || secondBody.node?.name == "enemyBullet" || secondBody.node?.name == "enemyRay") {
+            if secondBody.node?.name != "enemyRay" {
+                player!.takeDamage()
+                ui!.setLifeUI(index: player!.getHealth())
+                if secondBody.node?.name == "enemyBullet" {
+                    enemiesBullets.removeAll() { bullet in
+                        if bullet.bulletSprite == secondBody.node {
+                            bullet.targetHit()
+                            return true
+                        }
+                        return false
                     }
-                    return false
                 }
             }
-        }
-        else if firstBody.node?.name == "player" && !player!.isHit() && secondBody.node?.name == "enemyRay" {
-            for enemy in enemies {
-                if enemy.spriteList[1] == secondBody.node && enemy.rayIsActive() && !(player!.ship.position.y > enemy.spriteList[1].position.y) {
-                    player!.takeDamage()
-                    ui!.setLifeUI(index: player!.getHealth())
+            else {
+                for enemy in enemies {
+                    if enemy.spriteList[1] == secondBody.node && enemy.rayIsActive() && !(player!.ship.position.y > enemy.spriteList[1].position.y) {
+                        player!.takeDamage()
+                        ui!.setLifeUI(index: player!.getHealth())
+                    }
                 }
             }
         }
