@@ -70,9 +70,18 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     var lastTouches = [UITouch]()
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        player!.manageEngineEffect(isMoving: true)
-        lastTouches.append(touches.first!)
-        updateDirection()
+        for touch in touches {
+            let location = touch.location(in: self)
+            let touchedNode = atPoint(location)
+
+            if touchedNode == ui!.shieldBtn || touchedNode == ui!.shieldText {
+                player!.activateShield()
+            } else {
+                player!.manageEngineEffect(isMoving: true)
+                lastTouches.append(touches.first!)
+                updateDirection()
+            }
+        }
     }
 
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -145,6 +154,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             enemy.updateMovement()
             let bullets = enemy.shoot()
+            if let dreadnought = enemy as? Dreadnought {
+                dreadnought.setShieldPosition(shieldPos: player!.shield.position.y)
+            }
             if !bullets.isEmpty {
                 for bullet in bullets {
                     enemiesBullets.append(bullet)
@@ -177,7 +189,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         var firstBody = SKPhysicsBody()
         var secondBody = SKPhysicsBody()
         
-        if contact.bodyA.node?.name == "player" {
+        if contact.bodyA.node?.name == "shield" {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else if contact.bodyA.node?.name == "player" {
             firstBody = contact.bodyA
             secondBody = contact.bodyB
         } else if contact.bodyA.node?.name == "enemy" {
@@ -191,7 +206,24 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             secondBody = contact.bodyA
         }
         
-        if firstBody.node?.name == "player" && !player!.isHit() && (secondBody.node?.name == "enemy" || secondBody.node?.name == "enemyBullet" || secondBody.node?.name == "enemyRay") {
+        if player!.shield.isHidden == false && firstBody.node?.name == "shield" && (secondBody.node?.name == "enemyBullet" || secondBody.node?.name == "enemyRay") {
+            if secondBody.node?.name == "enemyBullet" {
+                enemiesBullets.removeAll() { bullet in
+                    if bullet.bulletSprite == secondBody.node {
+                        bullet.targetHit()
+                        return true
+                    }
+                    return false
+                }
+            } else if secondBody.node?.name == "enemyRay" {
+                for enemy in enemies {
+                    if enemy.spriteList[1] == secondBody.node && enemy.rayIsActive() && !(player!.ship.position.y > enemy.spriteList[1].position.y) {
+                        enemy.rayShield = true
+                    }
+                }
+            }
+        }
+        else if firstBody.node?.name == "player" && !player!.isHit() && (secondBody.node?.name == "enemy" || secondBody.node?.name == "enemyBullet" || secondBody.node?.name == "enemyRay") {
             if secondBody.node?.name != "enemyRay" {
                 player!.takeDamage()
                 ui!.setLifeUI(index: player!.getHealth())
@@ -205,7 +237,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
             }
-            else {
+            else if player!.shield.isHidden == true {
                 for enemy in enemies {
                     if enemy.spriteList[1] == secondBody.node && enemy.rayIsActive() && !(player!.ship.position.y > enemy.spriteList[1].position.y) {
                         player!.takeDamage()
@@ -229,4 +261,26 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
         }
     }
+    
+    func didEnd(_ contact: SKPhysicsContact) {
+        var firstBody = SKPhysicsBody()
+        var secondBody = SKPhysicsBody()
+
+        if contact.bodyA.node?.name == "shield" {
+            firstBody = contact.bodyA
+            secondBody = contact.bodyB
+        } else {
+            firstBody = contact.bodyB
+            secondBody = contact.bodyA
+        }
+
+        if firstBody.node?.name == "shield" && secondBody.node?.name == "enemyRay" {
+            for enemy in enemies {
+                if enemy.spriteList[1] == secondBody.node {
+                    enemy.rayShield = false
+                }
+            }
+        }
+    }
+
 }

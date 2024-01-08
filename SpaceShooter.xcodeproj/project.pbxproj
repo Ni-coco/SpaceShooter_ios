@@ -31,6 +31,7 @@
 		3CBBE6C22B29A2990083EA04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CBBE6C02B29A2990083EA04 /* LaunchScreen.storyboard */; };
 		3CBBE6C92B29A3940083EA04 /* MainShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6C82B29A3940083EA04 /* MainShip.swift */; };
 		3CBBE6CB2B29E3C60083EA04 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6CA2B29E3C60083EA04 /* Background.swift */; };
+		3CFF7CF02B4C2EF40079600C /* Minecraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CFF7CEF2B4C2EF40079600C /* Minecraft.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,6 +60,8 @@
 		3CBBE6C12B29A2990083EA04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CBBE6C82B29A3940083EA04 /* MainShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShip.swift; sourceTree = "<group>"; };
 		3CBBE6CA2B29E3C60083EA04 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		3CFF7CEF2B4C2EF40079600C /* Minecraft.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Minecraft.ttf; path = "../../../../T-JAV-501-LYO_10/SpaceShooter/src/main/resources/Minecraft.ttf"; sourceTree = "<group>"; };
+		3CFF7CF32B4C34AD0079600C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +129,7 @@
 		3CBBE6B02B29A2980083EA04 /* SpaceShooter */ = {
 			isa = PBXGroup;
 			children = (
+				3CFF7CF32B4C34AD0079600C /* Info.plist */,
 				3C82EBFD2B304D6F002A236A /* Bullet */,
 				3C2878B12B2D01A400AE553E /* Protocol */,
 				3C2878A42B2C9D6300AE553E /* Enemies */,
@@ -139,6 +143,7 @@
 				3CBBE6BB2B29A2980083EA04 /* Main.storyboard */,
 				3CBBE6BE2B29A2990083EA04 /* Assets.xcassets */,
 				3CBBE6C02B29A2990083EA04 /* LaunchScreen.storyboard */,
+				3CFF7CEF2B4C2EF40079600C /* Minecraft.ttf */,
 			);
 			path = SpaceShooter;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 			files = (
 				3CBBE6BD2B29A2980083EA04 /* Main.storyboard in Resources */,
 				3CBBE6B42B29A2980083EA04 /* GameScene.sks in Resources */,
+				3CFF7CF02B4C2EF40079600C /* Minecraft.ttf in Resources */,
 				3CBBE6BF2B29A2990083EA04 /* Assets.xcassets in Resources */,
 				3CBBE6C22B29A2990083EA04 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -388,6 +394,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D9JM84N38G;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SpaceShooter/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -419,6 +426,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = D9JM84N38G;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = SpaceShooter/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

@@ -21,7 +21,7 @@ class EnergyBullet : Bullet, Animate {
         self.pattern = pattern
         
         self.xMove = CGFloat(arc4random_uniform(2))
-        self.yMove = CGFloat(arc4random_uniform(2))
+        self.yMove = arc4random_uniform(2) == 0 ? 0 : 1.2
         self.random = Int(arc4random_uniform(2))
         
         bulletSprite = SKSpriteNode(texture: SKTexture(imageNamed: "Ball"), color: .white, size: CGSize(width: 32, height: 32))

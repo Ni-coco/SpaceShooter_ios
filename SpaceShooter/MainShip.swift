@@ -85,6 +85,13 @@ class MainShip: SKNode, Animate {
         shield.zPosition = 104
         shield.isHidden = true
         
+        shield.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: shield.size.width / 2, height: shield.size.width / 6), center: CGPoint(x: 0, y: 15))
+        shield.physicsBody?.affectedByGravity = false
+        shield.physicsBody?.collisionBitMask = 0
+        shield.physicsBody?.categoryBitMask = 1
+        shield.physicsBody?.contactTestBitMask = 2
+        shield.name = "shield"
+        
         ship.setScale(scale * 1.05)
         engine.setScale(scale * 1.05)
         engineEffect.setScale(scale * 1.05)
@@ -223,6 +230,13 @@ class MainShip: SKNode, Animate {
             self.sprite.isHidden = false
             self.hit = false
         }
+    }
+    
+    func activateShield() {
+        self.shield.isHidden = false
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+//            self.shield.isHidden = true
+//        }
     }
     
     func getHealth() -> Int {

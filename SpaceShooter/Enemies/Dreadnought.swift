@@ -9,6 +9,7 @@ import SpriteKit
 
 class Dreadnought: SKNode, Animate, Enemies {
     
+    var rayShield: Bool = false
     var canShoot: Bool = true
     
     var ship: SKSpriteNode!
@@ -26,6 +27,7 @@ class Dreadnought: SKNode, Animate, Enemies {
     var shipSpeed: CGFloat = 0.6
     var health: Int = 1000
     var rayActive: Bool = false
+    var shieldPos: CGFloat = 0
 
     init(viewSize: CGRect) {
         
@@ -101,7 +103,7 @@ class Dreadnought: SKNode, Animate, Enemies {
         if getHealth() < 1 {
             return []
         }
-        let shoot = Int(arc4random_uniform(200))
+        let shoot = Int(arc4random_uniform(0))
         if shoot == 0 && canShoot == true {
             rayShoot()
         }
@@ -112,7 +114,15 @@ class Dreadnought: SKNode, Animate, Enemies {
     }
     
     func updateRay() {
-        weapon.size.height = ((viewSize.height / 2) + weapon.position.y)
+        if (rayShield) {
+            weapon.size.height = (weapon.position.y - shieldPos) - 20
+        } else {
+            weapon.size.height = ((viewSize.height / 2) + weapon.position.y)
+        }
+    }
+    
+    func setShieldPosition(shieldPos: CGFloat) {
+        self.shieldPos = shieldPos
     }
     
     func rayShoot() {

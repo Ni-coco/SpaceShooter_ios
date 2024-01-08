@@ -9,6 +9,7 @@ import SpriteKit
 
 class Scout: SKNode, Animate, Enemies {
     
+    var rayShield: Bool = false
     var canShoot: Bool = true
     
     var ship: SKSpriteNode!

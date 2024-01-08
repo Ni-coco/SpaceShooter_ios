@@ -9,6 +9,7 @@ import SpriteKit
 
 class Frigate: SKNode, Animate, Enemies {
     
+    var rayShield: Bool = false
     var canShoot: Bool = true
     
     var ship: SKSpriteNode!

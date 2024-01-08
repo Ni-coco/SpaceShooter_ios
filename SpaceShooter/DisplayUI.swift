@@ -12,6 +12,8 @@ class DisplayUI: SKNode {
     
     var lifeUI: SKSpriteNode
     var shieldUI: SKSpriteNode
+    var shieldBtn: SKSpriteNode
+    var shieldText: SKLabelNode = SKLabelNode()
     
     let viewSize: CGRect
     var scale: CGFloat = 0
@@ -22,24 +24,33 @@ class DisplayUI: SKNode {
 
         lifeUI = SKSpriteNode(texture: SKTexture(imageNamed: "health4"))
         shieldUI = SKSpriteNode(texture: SKTexture(imageNamed: "shield4"))
+        shieldBtn = SKSpriteNode(texture: SKTexture(imageNamed: "Container"))
         
         super.init()
         
         scale = getScale(viewSize: viewSize)
         
-        
         lifeUI.position = CGPoint(x: -(viewSize.maxX / 2) + (75 * scale), y: -(viewSize.maxY / 2) + (37.5 * scale))
         shieldUI.position = CGPoint(x: -(viewSize.maxX / 2) + (75 * scale), y: -(viewSize.maxY / 2) + (62.5 * scale))
+        shieldBtn.position = CGPoint(x: (viewSize.maxX / 2) - (80 * scale), y: -(viewSize.maxY / 2) + (50 * scale))
         
         lifeUI.zPosition = 1
         lifeUI.setScale(scale)
         
         shieldUI.zPosition = 1
         shieldUI.setScale(scale)
+        
+        shieldBtn.zPosition = 1
+        shieldBtn.setScale(scale * 0.5)
+        
+        shieldText = SKLabelNode(text: "Shield")
+        shieldText.fontName = UIFont(name: "Minecraft", size: 30)?.fontName
+        shieldText.position = CGPoint(x: 0, y: -10) // Adjust the position based on your requirements
+        shieldBtn.addChild(shieldText)
                             
         addChild(lifeUI)
         addChild(shieldUI)
-
+        addChild(shieldBtn)
     }
     
     required init?(coder aDecoder: NSCoder) {

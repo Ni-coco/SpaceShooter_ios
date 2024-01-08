@@ -22,6 +22,7 @@ extension Bullet {
     }
         
     func targetHit() {
+        self.bulletSprite.physicsBody = nil
         let spriteSheet = SKTexture(imageNamed: "bulletTouch")
         let spriteWidth: CGFloat = 30
         

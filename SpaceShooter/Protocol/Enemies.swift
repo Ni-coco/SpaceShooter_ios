@@ -15,6 +15,7 @@ protocol Enemies: AnyObject, Animate {
     var moving: CGPoint { get set }
     var shipSize: CGSize { get set }
     var shipSpeed: CGFloat { get set }
+    var rayShield: Bool { get set }
     
     func updateMovement()
     func generateDestination() -> CGPoint
