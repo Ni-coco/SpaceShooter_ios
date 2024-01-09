@@ -24,11 +24,12 @@ class Frigate: SKNode, Animate, Enemies {
     var shipSize: CGSize = CGSize()
     var scale: CGFloat = 0
     var shipSpeed: CGFloat = 0.8
-    var health: Int = 5
+    var health: Int
 
-    init(viewSize: CGRect) {
+    init(viewSize: CGRect, health: Int) {
         
         self.viewSize = viewSize
+        self.health = health
 
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "FrigateWeapon"), color: .white, size: CGSize(width: 64, height: 64))
         engine = SKSpriteNode(texture: SKTexture(imageNamed: "FrigateEngine"), color: .white, size: CGSize(width: 64, height: 64))

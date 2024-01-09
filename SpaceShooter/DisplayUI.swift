@@ -14,6 +14,7 @@ class DisplayUI: SKNode {
     var shieldUI: SKSpriteNode
     var shieldBtn: SKSpriteNode
     var shieldText: SKLabelNode = SKLabelNode()
+    var waveText: SKLabelNode = SKLabelNode()
     
     let viewSize: CGRect
     var scale: CGFloat = 0
@@ -45,13 +46,18 @@ class DisplayUI: SKNode {
         shieldBtn.setScale(scale * 0.5)
         
         shieldText = SKLabelNode(text: "Shield")
-        shieldText.fontName = UIFont(name: "Minecraft", size: 30)?.fontName
-        shieldText.position = CGPoint(x: 0, y: -10) // Adjust the position based on your requirements
+        shieldText.fontName = UIFont(name: "Minecraft", size: 40)?.fontName
+        shieldText.position = CGPoint(x: 0, y: -12) // Adjust the position based on your requirements
         shieldBtn.addChild(shieldText)
+        
+        waveText = SKLabelNode(text: "Wave 1")
+        waveText.fontName = UIFont(name: "Minecraft", size: 60)?.fontName
+        waveText.position = CGPoint(x: 0, y: 0)
                             
         addChild(lifeUI)
         addChild(shieldUI)
         addChild(shieldBtn)
+        addChild(waveText)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -92,6 +98,14 @@ class DisplayUI: SKNode {
     
     func shieldAvailable() -> Bool {
         return self.canShield
+    }
+    
+    func displayWave(wave: Int) {
+        waveText.text = "Wave \(wave)"
+        waveText.alpha = 1.0
+
+        let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: 5.0)
+        waveText.run(fadeOut)
     }
 }
 

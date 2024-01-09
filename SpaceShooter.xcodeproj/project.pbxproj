@@ -31,6 +31,7 @@
 		3CBBE6C22B29A2990083EA04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CBBE6C02B29A2990083EA04 /* LaunchScreen.storyboard */; };
 		3CBBE6C92B29A3940083EA04 /* MainShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6C82B29A3940083EA04 /* MainShip.swift */; };
 		3CBBE6CB2B29E3C60083EA04 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6CA2B29E3C60083EA04 /* Background.swift */; };
+		3CF450242B4D852B00FC1C53 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF450232B4D852B00FC1C53 /* Scenario.swift */; };
 		3CFF7CF02B4C2EF40079600C /* Minecraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CFF7CEF2B4C2EF40079600C /* Minecraft.ttf */; };
 /* End PBXBuildFile section */
 
@@ -60,6 +61,7 @@
 		3CBBE6C12B29A2990083EA04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CBBE6C82B29A3940083EA04 /* MainShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShip.swift; sourceTree = "<group>"; };
 		3CBBE6CA2B29E3C60083EA04 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		3CF450232B4D852B00FC1C53 /* Scenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenario.swift; sourceTree = "<group>"; };
 		3CFF7CEF2B4C2EF40079600C /* Minecraft.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Minecraft.ttf; path = "../../../../T-JAV-501-LYO_10/SpaceShooter/src/main/resources/Minecraft.ttf"; sourceTree = "<group>"; };
 		3CFF7CF32B4C34AD0079600C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -136,6 +138,7 @@
 				3CBBE6B12B29A2980083EA04 /* AppDelegate.swift */,
 				3CBBE6B32B29A2980083EA04 /* GameScene.sks */,
 				3CBBE6B72B29A2980083EA04 /* GameScene.swift */,
+				3CF450232B4D852B00FC1C53 /* Scenario.swift */,
 				3CBBE6CA2B29E3C60083EA04 /* Background.swift */,
 				3CBBE6C82B29A3940083EA04 /* MainShip.swift */,
 				3C17D8CC2B2C617100359AD7 /* DisplayUI.swift */,
@@ -227,6 +230,7 @@
 				3C82EBFF2B304D87002A236A /* EnergyBullet.swift in Sources */,
 				3C6BD9AD2B3B1EBF0024A850 /* CanonBullet.swift in Sources */,
 				3C2878B02B2CFED300AE553E /* Dreadnought.swift in Sources */,
+				3CF450242B4D852B00FC1C53 /* Scenario.swift in Sources */,
 				3C10C3062B32184E007FC3B8 /* BoltBullet.swift in Sources */,
 				3C82EC012B304DAB002A236A /* Bullet.swift in Sources */,
 				3C2878AC2B2CFE1C00AE553E /* Frigate.swift in Sources */,

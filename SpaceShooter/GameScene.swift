@@ -14,16 +14,15 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     let background = Background()
     
+    var scenario: Scenario?
+    
     var player: MainShip?
     var ui: DisplayUI?
-    var fighter: Fighter?
-    var scout: Scout?
-    var frigate: Frigate?
-    var dreadnought: Dreadnought?
     
     var playerBullets = [Bullet]()
     var enemiesBullets = [Bullet]()
     var enemies = [Enemies]()
+    var enemiesCount = 0
             
     override func didMove(to view: SKView) {
         self.physicsWorld.contactDelegate = self
@@ -31,25 +30,13 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         viewSize = view.frame
         
         addBackground()
-
+        
+        scenario = Scenario(viewSize: viewSize)
+        
         player = MainShip(viewSize: viewSize)
         ui = DisplayUI(viewSize: viewSize)
-        fighter = Fighter(viewSize: viewSize)
-        scout = Scout(viewSize: viewSize)
-        frigate = Frigate(viewSize: viewSize)
-        dreadnought = Dreadnought(viewSize: viewSize)
         
         addChild(player!)
-//        addChild(fighter!)
-//        addChild(scout!)
-//        addChild(frigate!)
-        addChild(dreadnought!)
-                
-//        enemies.append(fighter!)
-//        enemies.append(scout!)
-//        enemies.append(frigate!)
-        enemies.append(dreadnought!)
-    
         addChild(ui!)
     }
     
@@ -133,6 +120,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         background.updateBackground()
         updatePlayer()
         updateEnemies()
+        updateScenario()
     }
     
     func updatePlayer() {
@@ -159,6 +147,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         enemies.removeAll { enemy in
             if enemy.getHealth() < 1 {
                 enemy.isKilled()
+                enemiesCount -= 1
                 return true
             }
             enemy.updateMovement()
@@ -182,6 +171,21 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             }
             bullet.updateMovement()
             return false // Keep this bullet in the array
+        }
+    }
+    
+    func updateScenario() {
+        if enemiesCount == 0 {
+            enemiesCount = 99
+            ui!.displayWave(wave: scenario!.getWave())
+            DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                self.enemiesCount = 0
+                for enemy in self.scenario!.getLevel() {
+                    self.enemies.append(enemy)
+                    self.addChild(enemy as! SKNode)
+                    self.enemiesCount += 1
+                }
+            }
         }
     }
     

@@ -25,13 +25,14 @@ class Dreadnought: SKNode, Animate, Enemies {
     var shipSize: CGSize = CGSize()
     var scale: CGFloat = 0
     var shipSpeed: CGFloat = 0.6
-    var health: Int = 1000
+    var health: Int
     var rayActive: Bool = false
     var shieldPos: CGFloat = 0
 
-    init(viewSize: CGRect) {
+    init(viewSize: CGRect, health: Int) {
         
         self.viewSize = viewSize
+        self.health = health
 
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "DreadnoughtWeapon"), color: .white, size: CGSize(width: 128, height: 128))
         weapon = SKSpriteNode(texture: SKTexture(imageNamed: "Ray"), color: .white, size: CGSize(width: 18, height: viewSize.height))
