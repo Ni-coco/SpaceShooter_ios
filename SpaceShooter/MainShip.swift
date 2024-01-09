@@ -234,9 +234,9 @@ class MainShip: SKNode, Animate {
     
     func activateShield() {
         self.shield.isHidden = false
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-//            self.shield.isHidden = true
-//        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+            self.shield.isHidden = true
+        }
     }
     
     func getHealth() -> Int {

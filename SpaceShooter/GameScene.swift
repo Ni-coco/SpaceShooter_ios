@@ -76,6 +76,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
 
             if touchedNode == ui!.shieldBtn || touchedNode == ui!.shieldText {
                 player!.activateShield()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                    for enemy in self.enemies {
+                        if let dreadnought = enemy as? Dreadnought {
+                            dreadnought.reloadPhysicsBody()
+                            enemy.rayShield = false
+                        }
+                    }
+                }
+
+
             } else {
                 player!.manageEngineEffect(isMoving: true)
                 lastTouches.append(touches.first!)
@@ -237,11 +247,19 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     }
                 }
             }
-            else if player!.shield.isHidden == true {
+            else if player!.shield.isHidden == true || player!.shield.isHidden == false {
                 for enemy in enemies {
-                    if enemy.spriteList[1] == secondBody.node && enemy.rayIsActive() && !(player!.ship.position.y > enemy.spriteList[1].position.y) {
-                        player!.takeDamage()
-                        ui!.setLifeUI(index: player!.getHealth())
+                    if enemy.spriteList[1] == secondBody.node && !(player!.ship.position.y > enemy.spriteList[1].position.y) {
+                        
+                        if enemy.rayIsActive() && player!.shield.isHidden == true {
+                            player!.takeDamage()
+                            ui!.setLifeUI(index: player!.getHealth())
+                        }
+                        else if !enemy.rayIsActive() {
+                            if let dreadnought = enemy as? Dreadnought {
+                                dreadnought.reloadPhysicsBody()
+                            }
+                        }
                     }
                 }
             }

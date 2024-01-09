@@ -62,7 +62,7 @@ class Dreadnought: SKNode, Animate, Enemies {
         weapon.zRotation = .pi
         weapon.setScale(scale * 1.2)
         weapon.isHidden = true
-        weapon.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: weapon.size.width / 2, height: weapon.size.height * 2))
+        weapon.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: weapon.size.width / 2, height: viewSize.height * 2))
         weapon.physicsBody?.affectedByGravity = false
         weapon.physicsBody?.allowsRotation = false
         weapon.physicsBody?.collisionBitMask = 0
@@ -103,7 +103,7 @@ class Dreadnought: SKNode, Animate, Enemies {
         if getHealth() < 1 {
             return []
         }
-        let shoot = Int(arc4random_uniform(0))
+        let shoot = Int(arc4random_uniform(200))
         if shoot == 0 && canShoot == true {
             rayShoot()
         }
@@ -144,6 +144,7 @@ class Dreadnought: SKNode, Animate, Enemies {
             if frame != currentFrame && frame == 22 {
                 self.weapon.isHidden = false
                 self.rayActive = true
+                self.reloadPhysicsBody()
                 currentFrame = frame
             }
             self.spriteList[0].texture = textures[frame > 33 ? 0 : frame]
@@ -155,6 +156,7 @@ class Dreadnought: SKNode, Animate, Enemies {
             self.canShoot = true
             self.weapon.isHidden = true
             self.rayActive = false
+            self.reloadPhysicsBody()
         }
         
         let sequence = SKAction.sequence([animateAction, removeAction])
@@ -199,5 +201,17 @@ class Dreadnought: SKNode, Animate, Enemies {
     
     func rayIsActive() -> Bool {
         return self.rayActive
+    }
+    
+    func reloadPhysicsBody() {
+        weapon.physicsBody = nil
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) { [self] in
+            weapon.physicsBody = SKPhysicsBody(rectangleOf: CGSize(width: weapon.size.width / 2, height: viewSize.height * 2))
+            weapon.physicsBody?.affectedByGravity = false
+            weapon.physicsBody?.allowsRotation = false
+            weapon.physicsBody?.collisionBitMask = 0
+            weapon.name = "enemyRay"
+            self.updateRay()
+        }
     }
 }
