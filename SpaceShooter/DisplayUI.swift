@@ -15,6 +15,9 @@ class DisplayUI: SKNode {
     var shieldBtn: SKSpriteNode
     var shieldText: SKLabelNode = SKLabelNode()
     var waveText: SKLabelNode = SKLabelNode()
+    var timerText: SKLabelNode = SKLabelNode()
+    
+    var launchTime = Int64(Date().timeIntervalSince1970 * 1000)
     
     let viewSize: CGRect
     var scale: CGFloat = 0
@@ -53,11 +56,16 @@ class DisplayUI: SKNode {
         waveText = SKLabelNode(text: "Wave 1")
         waveText.fontName = UIFont(name: "Minecraft", size: 60)?.fontName
         waveText.position = CGPoint(x: 0, y: 0)
+        
+        timerText.fontName = UIFont(name: "Minecraft", size: 5)?.fontName
+        timerText.position = CGPoint(x: -(viewSize.width / 2) + 50, y: (viewSize.height / 2) - 50)
+        timerText.setScale(0.5)
                             
         addChild(lifeUI)
         addChild(shieldUI)
         addChild(shieldBtn)
         addChild(waveText)
+        addChild(timerText)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -106,6 +114,13 @@ class DisplayUI: SKNode {
 
         let fadeOut = SKAction.fadeAlpha(to: 0.0, duration: 5.0)
         waveText.run(fadeOut)
+    }
+    
+    func reloadTimer() {
+        let remainTime = Int64(Date().timeIntervalSince1970) * 1000 - launchTime
+        let min = Int((remainTime / 1000) / 60)
+        let sec = Int((remainTime / 1000) % 60)
+        timerText.text = String(format: "%02d:%02d", min, sec) 
     }
 }
 

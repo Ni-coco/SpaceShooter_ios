@@ -121,6 +121,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         updatePlayer()
         updateEnemies()
         updateScenario()
+        updateUI()
     }
     
     func updatePlayer() {
@@ -187,6 +188,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+    }
+    
+    func updateUI() {
+        ui!.reloadTimer()
     }
     
     func isOut(position: CGPoint) -> Bool {
