@@ -17,6 +17,7 @@ class DisplayUI: SKNode {
     
     let viewSize: CGRect
     var scale: CGFloat = 0
+    var canShield: Bool = true
 
     init(viewSize: CGRect) {
         
@@ -72,6 +73,25 @@ class DisplayUI: SKNode {
         if index >= 0 {
             shieldUI.texture = SKTexture(imageNamed: "shield\(index)")
         }
+    }
+    
+    func manageShieldUI() {
+        canShield = false
+        self.setShieldUI(index: 0)
+        var time = 5.0
+        for i in 0..<5 {
+            DispatchQueue.main.asyncAfter(deadline: .now() + time) {
+                self.setShieldUI(index: i)
+                if i == 4 {
+                    self.canShield = true
+                }
+            }
+            time += 5.0
+        }
+    }
+    
+    func shieldAvailable() -> Bool {
+        return self.canShield
     }
 }
 

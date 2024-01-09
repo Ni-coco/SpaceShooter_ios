@@ -74,7 +74,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
 
-            if touchedNode == ui!.shieldBtn || touchedNode == ui!.shieldText {
+            if (touchedNode == ui!.shieldBtn || touchedNode == ui!.shieldText) && ui!.shieldAvailable() {
                 player!.activateShield()
                 DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                     for enemy in self.enemies {
@@ -84,8 +84,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         }
                     }
                 }
-
-
+                ui!.manageShieldUI()
             } else {
                 player!.manageEngineEffect(isMoving: true)
                 lastTouches.append(touches.first!)
