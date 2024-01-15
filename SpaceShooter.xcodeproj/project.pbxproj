@@ -15,6 +15,7 @@
 		3C2878AA2B2CFD9800AE553E /* Scout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878A92B2CFD9800AE553E /* Scout.swift */; };
 		3C2878AC2B2CFE1C00AE553E /* Frigate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878AB2B2CFE1C00AE553E /* Frigate.swift */; };
 		3C2878B02B2CFED300AE553E /* Dreadnought.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878AF2B2CFED300AE553E /* Dreadnought.swift */; };
+		3C56C2542B552ADD001BD117 /* Upgrade.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C56C2532B552ADD001BD117 /* Upgrade.swift */; };
 		3C6BD9AD2B3B1EBF0024A850 /* CanonBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6BD9AC2B3B1EBF0024A850 /* CanonBullet.swift */; };
 		3C6BD9AF2B3B1EDA0024A850 /* SpaceBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6BD9AE2B3B1EDA0024A850 /* SpaceBullet.swift */; };
 		3C6BD9B12B3B1EF50024A850 /* RocketBulletP.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C6BD9B02B3B1EF50024A850 /* RocketBulletP.swift */; };
@@ -44,6 +45,7 @@
 		3C2878A92B2CFD9800AE553E /* Scout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scout.swift; sourceTree = "<group>"; };
 		3C2878AB2B2CFE1C00AE553E /* Frigate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frigate.swift; sourceTree = "<group>"; };
 		3C2878AF2B2CFED300AE553E /* Dreadnought.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dreadnought.swift; sourceTree = "<group>"; };
+		3C56C2532B552ADD001BD117 /* Upgrade.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upgrade.swift; sourceTree = "<group>"; };
 		3C6BD9AC2B3B1EBF0024A850 /* CanonBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CanonBullet.swift; sourceTree = "<group>"; };
 		3C6BD9AE2B3B1EDA0024A850 /* SpaceBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpaceBullet.swift; sourceTree = "<group>"; };
 		3C6BD9B02B3B1EF50024A850 /* RocketBulletP.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketBulletP.swift; sourceTree = "<group>"; };
@@ -139,6 +141,7 @@
 				3CBBE6B32B29A2980083EA04 /* GameScene.sks */,
 				3CBBE6B72B29A2980083EA04 /* GameScene.swift */,
 				3CF450232B4D852B00FC1C53 /* Scenario.swift */,
+				3C56C2532B552ADD001BD117 /* Upgrade.swift */,
 				3CBBE6CA2B29E3C60083EA04 /* Background.swift */,
 				3CBBE6C82B29A3940083EA04 /* MainShip.swift */,
 				3C17D8CC2B2C617100359AD7 /* DisplayUI.swift */,
@@ -240,6 +243,7 @@
 				3CBBE6BA2B29A2980083EA04 /* GameViewController.swift in Sources */,
 				3C2878A82B2CF98400AE553E /* Enemies.swift in Sources */,
 				3C6BD9B12B3B1EF50024A850 /* RocketBulletP.swift in Sources */,
+				3C56C2542B552ADD001BD117 /* Upgrade.swift in Sources */,
 				3CBBE6C92B29A3940083EA04 /* MainShip.swift in Sources */,
 				3CBBE6B22B29A2980083EA04 /* AppDelegate.swift in Sources */,
 				3C17D8CD2B2C617100359AD7 /* DisplayUI.swift in Sources */,

@@ -21,6 +21,8 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     var playerBullets = [Bullet]()
     var enemiesBullets = [Bullet]()
+    var upgradeList = [Upgrade]()
+
     var enemies = [Enemies]()
     var enemiesCount = 0
             
@@ -119,9 +121,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         background.updateBackground()
         updatePlayer()
-        updateEnemies()
-        updateScenario()
-        updateUI()
+//        updateEnemies()
+//        updateScenario()
+//        updateUI()
     }
     
     func updatePlayer() {
@@ -139,7 +141,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bullet.bulletSprite.removeFromParent()
                 return true
             }
-            bullet.bulletSprite.position.y += 2
+//            bullet.bulletSprite.position.y += 2
             return false
         }
     }
@@ -149,6 +151,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if enemy.getHealth() < 1 {
                 enemy.isKilled()
                 enemiesCount -= 1
+                if let upgrade = enemy.getUpgrade() {
+                    upgradeList.append(upgrade)
+                    addChild(upgrade)
+                }
                 return true
             }
             enemy.updateMovement()
@@ -187,6 +193,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     self.enemiesCount += 1
                 }
             }
+        }
+        for upgrade in upgradeList {
+            upgrade.updateMove()
         }
     }
     
@@ -241,6 +250,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 }
             }
         }
+        else if firstBody.node?.name == "player" && secondBody.node?.name == "upgrade" {
+            upgradeList.removeAll() { upgrade in
+                if secondBody.node == upgrade.upgradeSprite {
+                    player!.updateStat(stat: upgrade.getBonusIndex())
+                    upgrade.removeFromParent()
+                    return true
+                }
+                return false
+            }
+        }
         else if firstBody.node?.name == "player" && !player!.isHit() && (secondBody.node?.name == "enemy" || secondBody.node?.name == "enemyBullet" || secondBody.node?.name == "enemyRay") {
             if secondBody.node?.name != "enemyRay" {
                 player!.takeDamage()
@@ -275,7 +294,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if firstBody.node?.name == "enemy" && secondBody.node?.name == "playerBullet" {
             for enemy in enemies {
                 if enemy.spriteList[0] == firstBody.node {
-                    enemy.takeDamage(damage: 1)
+                    enemy.takeDamage(damage: player!.getDamage())
                 }
             }
             playerBullets.removeAll() { bullet in

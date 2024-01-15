@@ -50,7 +50,7 @@ class DisplayUI: SKNode {
         
         shieldText = SKLabelNode(text: "Shield")
         shieldText.fontName = UIFont(name: "Minecraft", size: 40)?.fontName
-        shieldText.position = CGPoint(x: 0, y: -12) // Adjust the position based on your requirements
+        shieldText.position = CGPoint(x: 0, y: -12)
         shieldBtn.addChild(shieldText)
         
         waveText = SKLabelNode(text: "Wave 1")
@@ -58,7 +58,7 @@ class DisplayUI: SKNode {
         waveText.position = CGPoint(x: 0, y: 0)
         
         timerText.fontName = UIFont(name: "Minecraft", size: 5)?.fontName
-        timerText.position = CGPoint(x: -(viewSize.width / 2) + 50, y: (viewSize.height / 2) - 50)
+        timerText.position = CGPoint(x: -(viewSize.width / 2) + 50, y: (viewSize.height / 2) - 40)
         timerText.setScale(0.5)
                             
         addChild(lifeUI)
