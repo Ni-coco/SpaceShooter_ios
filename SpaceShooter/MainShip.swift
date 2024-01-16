@@ -35,21 +35,19 @@ class MainShip: SKNode, Animate {
     let weaponList: [String] = ["canonGun", "spaceGun", "rocketGun", "zapperGun"]
     let bulletList: [String] = ["canonBullet", "spaceBullet", "rocketBullet", "zapperBullet"]
     
-    var weaponChoice: Int = 3
-
     var isShooting: Bool = false
     var direction: CGVector = CGVector(dx: 0.0, dy: 0.0)
     
     var shootSpeed: Double = 2.0
     var shipSpeed: Double = 1.5
     var health = 4
-    var damage = 100
+    var damage = 1
     var hit: Bool = false
     
     var engineLvl: Int = 0
     var engineIndex: Int = 0
-    var weaponLevel: Int = 3
-    var weaponIndex: Int = 0
+    var weaponLevel = 1
+    var weaponIndex = Int(arc4random_uniform(4))
     
     var speedStat: Double = 1
     var shootStat: Double = 1
@@ -65,8 +63,12 @@ class MainShip: SKNode, Animate {
         ship = SKSpriteNode(texture: SKTexture(imageNamed: "Full Health"), color: .white, size: SKTexture(imageNamed: "Full Health").size())
         engine = SKSpriteNode(texture: SKTexture(imageNamed: engineList[engineIndex]), color: .white, size: SKTexture(imageNamed: engineList[engineIndex]).size())
         engineEffect = SKSpriteNode(texture: SKTexture(imageNamed: engineListsMovement[engineIndex][0]), color: .white, size: CGSize(width: 48, height: 48))
-        weapon = SKSpriteNode(texture: SKTexture(imageNamed: weaponList[weaponChoice]), color: .white, size: CGSize(width: 48, height: 48))
+        weapon = SKSpriteNode(texture: SKTexture(imageNamed: weaponList[weaponIndex]), color: .white, size: CGSize(width: 48, height: 48))
         shield = SKSpriteNode(texture: SKTexture(imageNamed: "Shield"), color: .white, size: CGSize(width: 64, height: 64))
+        
+        if weaponIndex == 1 {
+            damage = 2
+        }
                       
         super.init()
         
@@ -134,8 +136,8 @@ class MainShip: SKNode, Animate {
     }
     
     func shoot() -> [Bullet] {
-        managePlayerShoot(sprite: weapon, spriteSheet: SKTexture(imageNamed: weaponList[weaponChoice]), duration: 0.4, spriteWidth: 48.0)
-        switch weaponChoice {
+        managePlayerShoot(sprite: weapon, spriteSheet: SKTexture(imageNamed: weaponList[weaponIndex]), duration: 0.4, spriteWidth: 48.0)
+        switch weaponIndex {
         case 0:
             return canonShoot()
         case 1:
@@ -155,7 +157,7 @@ class MainShip: SKNode, Animate {
         var y = ship.position.y + (18 * scale)
         for _ in 0..<2 {
             for _ in 0..<weaponLevel {
-                let bullet = CanonBullet(spawn: CGPoint(x: x, y: y), scale: scale, texture: bulletList[weaponChoice])
+                let bullet = CanonBullet(spawn: CGPoint(x: x, y: y), scale: scale, texture: bulletList[weaponIndex])
                 bullets.append(bullet)
                 x += (weaponLevel > 1 ? (8 * scale) : 0) * scale
             }
@@ -167,9 +169,9 @@ class MainShip: SKNode, Animate {
     
     func spaceBullet() -> [Bullet] {
         var bullets = [Bullet]()
-        var x = Double(ship.position.x) - Double(weaponLevel > 1 ? 4 * weaponLevel : 0) + (weaponLevel > 1 && weaponLevel < 4 ? 0 : 2)
+        var x = Double(ship.position.x) - Double(weaponLevel > 1 ? weaponLevel % 2 == 0 ? 4 * weaponLevel : 4 * weaponLevel + weaponLevel : 0)
         for _ in 0..<weaponLevel {
-            let bullet = SpaceBullet(spawn: CGPoint(x: x, y: ship.position.y + (15 * scale)), scale: scale, texture: bulletList[weaponChoice])
+            let bullet = SpaceBullet(spawn: CGPoint(x: x, y: ship.position.y + (15 * scale)), scale: scale, texture: bulletList[weaponIndex])
             bullets.append(bullet)
             x += (weaponLevel > 1 ? 12 : 0) * scale
         }
@@ -181,7 +183,7 @@ class MainShip: SKNode, Animate {
         var x = ship.position.x - (11 * scale) - ((weaponLevel == 1 ? 0 : weaponLevel == 2 ? 2 : 5) * scale)
         for _ in 0..<2 {
             for _ in 0..<weaponLevel {
-                let bullet = RocketBulletP(spawn: CGPoint(x: x, y: weapon.position.y + (16 * scale)), scale: scale, texture: bulletList[weaponChoice])
+                let bullet = RocketBulletP(spawn: CGPoint(x: x, y: weapon.position.y + (16 * scale)), scale: scale, texture: bulletList[weaponIndex])
                 bullets.append(bullet)
                 x += (weaponLevel > 1 ? (5 * scale) : 0) * scale
             }
@@ -195,7 +197,7 @@ class MainShip: SKNode, Animate {
         var x = ship.position.x - (8 * scale) - ((weaponLevel == 1 ? 0 : weaponLevel == 2 ? 4 : 10) * scale)
         for _ in 0..<2 {
             for _ in 0..<weaponLevel {
-                let bullet = ZapperBullet(spawn: CGPoint(x: x, y: weapon.position.y + (16 * scale)), scale: scale, texture: bulletList[weaponChoice])
+                let bullet = ZapperBullet(spawn: CGPoint(x: x, y: weapon.position.y + (16 * scale)), scale: scale, texture: bulletList[weaponIndex])
                 bullets.append(bullet)
                 x += (weaponLevel > 1 ? (7 * scale) : 0) * scale
             }
@@ -222,7 +224,7 @@ class MainShip: SKNode, Animate {
         let animateAction = SKAction.animate(with: textures, timePerFrame: duration / Double(frameCount))
         let sequenceAction = SKAction.sequence([animateAction])
         let completionAction = SKAction.run {
-            self.setFirstSprite(sprite: self.weapon, spriteSheet: SKTexture(imageNamed: self.weaponList[self.weaponChoice]), spriteWidth: 48.0)
+            self.setFirstSprite(sprite: self.weapon, spriteSheet: SKTexture(imageNamed: self.weaponList[self.weaponIndex]), spriteWidth: 48.0)
         }
         sprite.run(SKAction.sequence([sequenceAction, completionAction]))
 
@@ -257,7 +259,6 @@ class MainShip: SKNode, Animate {
     func updateStat(stat: Int) {
         switch stat {
         case 0:
-            engineIndex += 1
             if engineLvl != 5 {
                 engineLvl += 1
                 self.shipSpeed += 0.05

@@ -121,9 +121,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     override func update(_ currentTime: TimeInterval) {
         background.updateBackground()
         updatePlayer()
-//        updateEnemies()
-//        updateScenario()
-//        updateUI()
+        updateEnemies()
+        updateScenario()
+        updateUI()
     }
     
     func updatePlayer() {
@@ -141,7 +141,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 bullet.bulletSprite.removeFromParent()
                 return true
             }
-//            bullet.bulletSprite.position.y += 2
+            bullet.bulletSprite.position.y += 2
             return false
         }
     }
