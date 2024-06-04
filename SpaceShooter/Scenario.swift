@@ -112,4 +112,10 @@ class Scenario {
     func getWave() -> Int {
         return self.waveCount
     }
+    
+    func reset() {
+        indexLvl = 1
+        waveCount = 1
+        difficulty = 1
+    }
 }

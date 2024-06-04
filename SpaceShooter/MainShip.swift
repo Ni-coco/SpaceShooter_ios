@@ -305,4 +305,20 @@ class MainShip: SKNode, Animate {
     func getDamage() -> Int {
         return self.damage
     }
+    
+    func reset() {
+        shootSpeed = 2.0
+        shipSpeed = 1.5
+        health = 4
+        damage = 1
+        
+        engineLvl = 0
+        engineIndex = 0
+        weaponLevel = 1
+        weaponIndex = Int(arc4random_uniform(4))
+        
+        speedStat = 1
+        shootStat = 1
+        bulletStat = 1
+    }
 }

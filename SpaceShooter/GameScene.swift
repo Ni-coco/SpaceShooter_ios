@@ -10,14 +10,29 @@ import GameplayKit
 
 class GameScene: SKScene, SKPhysicsContactDelegate {
     
+    var isPlaying: Bool = false
+    
     var viewSize: CGRect = CGRect()
+    
+    //Scenes principal
+    var gameScene: SKNode = SKNode()
+    var menuScene: SKNode = SKNode()
+    
+    //Scenes secondaire
+    var gameOverScene: SKNode = SKNode()
+    var scoreScene: SKNode = SKNode()
+    var weaponChoiceScene: SKNode = SKNode()
+    
+    //Scene affiché
+    var displayScene: SKNode = SKNode()
     
     let background = Background()
     
     var scenario: Scenario?
-    
     var player: MainShip?
-    var ui: DisplayUI?
+    var gameUI: GameUI?
+    var menuUI: MenuUI?
+    var gameOverUI: GameOverUI?
     
     var playerBullets = [Bullet]()
     var enemiesBullets = [Bullet]()
@@ -30,16 +45,39 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         self.physicsWorld.contactDelegate = self
         
         viewSize = view.frame
-        
         addBackground()
         
-        scenario = Scenario(viewSize: viewSize)
+        addChild(displayScene)
         
+//        addChild(loadGameScene())
+        displayScene.addChild(loadMenuScene())
+    }
+    
+    func loadGameScene() -> SKNode {
         player = MainShip(viewSize: viewSize)
-        ui = DisplayUI(viewSize: viewSize)
+        gameUI = GameUI(viewSize: viewSize)
+        scenario = Scenario(viewSize: viewSize)
+
+        gameScene.removeAllChildren()
+        gameScene.addChild(player!)
+        gameScene.addChild(gameUI!)
         
-        addChild(player!)
-        addChild(ui!)
+        return gameScene
+    }
+    
+    func loadMenuScene() -> SKNode {
+        menuUI = MenuUI(viewSize: viewSize)
+        menuScene.addChild(menuUI!)
+        
+        return menuScene
+    }
+    
+    func loadGameOverScene() -> SKNode {
+        gameOverUI = GameOverUI(viewSize: viewSize)
+        gameOverUI!.setTime(score: gameUI!.getScore())
+        gameOverScene.addChild(gameOverUI!)
+        
+        return gameOverScene
     }
     
     func addBackground() {
@@ -62,22 +100,37 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         for touch in touches {
             let location = touch.location(in: self)
             let touchedNode = atPoint(location)
-
-            if (touchedNode == ui!.shieldBtn || touchedNode == ui!.shieldText) && ui!.shieldAvailable() {
-                player!.activateShield()
-                DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
-                    for enemy in self.enemies {
-                        if let dreadnought = enemy as? Dreadnought {
-                            dreadnought.reloadPhysicsBody()
-                            enemy.rayShield = false
+            
+            if (!isPlaying) {
+                if (touchedNode == menuUI!.startBtn || touchedNode == menuUI!.startText) {
+                    displayScene.removeAllChildren()
+                    displayScene.addChild(loadGameScene())
+                    
+                    scenario!.reset()
+                    player!.reset()
+                    gameUI!.reset()
+                    
+                    isPlaying = true
+                } else if (touchedNode == menuUI!.scoreBtn || touchedNode == menuUI!.scoreText) {
+                    print("display scoreboard")
+                }
+            } else {
+                if (touchedNode == gameUI!.shieldBtn || touchedNode == gameUI!.shieldText) && gameUI!.shieldAvailable() {
+                    player!.activateShield()
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+                        for enemy in self.enemies {
+                            if let dreadnought = enemy as? Dreadnought {
+                                dreadnought.reloadPhysicsBody()
+                                enemy.rayShield = false
+                            }
                         }
                     }
+                    gameUI!.manageShieldUI()
+                } else {
+                    player!.manageEngineEffect(isMoving: true)
+                    lastTouches.append(touches.first!)
+                    updateDirection()
                 }
-                ui!.manageShieldUI()
-            } else {
-                player!.manageEngineEffect(isMoving: true)
-                lastTouches.append(touches.first!)
-                updateDirection()
             }
         }
     }
@@ -93,7 +146,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 updateDirection()
             }
         }
-        if (lastTouches.isEmpty) {
+        if (isPlaying && lastTouches.isEmpty) {
             player!.manageEngineEffect(isMoving: false)
             player!.direction = CGVector(dx: 0.0, dy: 0.0)
         }
@@ -119,15 +172,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     override func update(_ currentTime: TimeInterval) {
+        if isPlaying {
+            updatePlayer()
+            updateEnemies()
+            updateScenario()
+            updateUI()
+        }
         background.updateBackground()
-        updatePlayer()
-        updateEnemies()
-        updateScenario()
-        updateUI()
     }
     
     func updatePlayer() {
-        player!.moveShip()
+        player?.moveShip()
         if !player!.isShooting && !player!.isHit() {
             let bulletsToAdd = player!.shoot()
             for bullet in bulletsToAdd {
@@ -184,7 +239,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func updateScenario() {
         if enemiesCount == 0 {
             enemiesCount = 99
-            ui!.displayWave(wave: scenario!.getWave())
+            gameUI!.displayWave(wave: scenario!.getWave())
             DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                 self.enemiesCount = 0
                 for enemy in self.scenario!.getLevel() {
@@ -200,7 +255,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     }
     
     func updateUI() {
-        ui!.reloadTimer()
+        gameUI!.reloadTimer()
     }
     
     func isOut(position: CGPoint) -> Bool {
@@ -263,7 +318,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         else if firstBody.node?.name == "player" && !player!.isHit() && (secondBody.node?.name == "enemy" || secondBody.node?.name == "enemyBullet" || secondBody.node?.name == "enemyRay") {
             if secondBody.node?.name != "enemyRay" {
                 player!.takeDamage()
-                ui!.setLifeUI(index: player!.getHealth())
+                gameUI!.setLifeUI(index: player!.getHealth())
                 if secondBody.node?.name == "enemyBullet" {
                     enemiesBullets.removeAll() { bullet in
                         if bullet.bulletSprite == secondBody.node {
@@ -273,6 +328,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         return false
                     }
                 }
+                if (player!.getHealth() == 0) {
+                    displayScene.removeAllChildren()
+                    displayScene.addChild(loadGameOverScene())
+                    
+                    scenario!.reset()
+                    player!.reset()
+                    gameUI!.reset()
+                    
+                    isPlaying = false
+                }
             }
             else if player!.shield.isHidden == true || player!.shield.isHidden == false {
                 for enemy in enemies {
@@ -280,7 +345,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         
                         if enemy.rayIsActive() && player!.shield.isHidden == true {
                             player!.takeDamage()
-                            ui!.setLifeUI(index: player!.getHealth())
+                            gameUI!.setLifeUI(index: player!.getHealth())
                         }
                         else if !enemy.rayIsActive() {
                             if let dreadnought = enemy as? Dreadnought {
@@ -288,6 +353,16 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                             }
                         }
                     }
+                }
+                if (player!.getHealth() == 0) {
+                    displayScene.removeAllChildren()
+                    displayScene.addChild(loadGameOverScene())
+                    
+                    scenario!.reset()
+                    player!.reset()
+                    gameUI!.reset()
+                    
+                    isPlaying = false
                 }
             }
         }

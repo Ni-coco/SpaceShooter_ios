@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		3C10C3042B31F117007FC3B8 /* RocketBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C10C3032B31F117007FC3B8 /* RocketBullet.swift */; };
 		3C10C3062B32184E007FC3B8 /* BoltBullet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C10C3052B32184E007FC3B8 /* BoltBullet.swift */; };
-		3C17D8CD2B2C617100359AD7 /* DisplayUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C17D8CC2B2C617100359AD7 /* DisplayUI.swift */; };
 		3C2878A62B2C9D7600AE553E /* Fighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878A52B2C9D7600AE553E /* Fighter.swift */; };
 		3C2878A82B2CF98400AE553E /* Enemies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878A72B2CF98400AE553E /* Enemies.swift */; };
 		3C2878AA2B2CFD9800AE553E /* Scout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C2878A92B2CFD9800AE553E /* Scout.swift */; };
@@ -32,14 +31,16 @@
 		3CBBE6C22B29A2990083EA04 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3CBBE6C02B29A2990083EA04 /* LaunchScreen.storyboard */; };
 		3CBBE6C92B29A3940083EA04 /* MainShip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6C82B29A3940083EA04 /* MainShip.swift */; };
 		3CBBE6CB2B29E3C60083EA04 /* Background.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CBBE6CA2B29E3C60083EA04 /* Background.swift */; };
+		3CCF21642C0E111A00C42A55 /* Minecraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CCF21632C0E111A00C42A55 /* Minecraft.ttf */; };
 		3CF450242B4D852B00FC1C53 /* Scenario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF450232B4D852B00FC1C53 /* Scenario.swift */; };
-		3CFF7CF02B4C2EF40079600C /* Minecraft.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3CFF7CEF2B4C2EF40079600C /* Minecraft.ttf */; };
+		3CF9D4222C0F160800ADF59F /* MenuUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9D4212C0F160800ADF59F /* MenuUI.swift */; };
+		3CF9D4262C0F5D2500ADF59F /* GameUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9D4252C0F5D2500ADF59F /* GameUI.swift */; };
+		3CF9D4282C0F5EB900ADF59F /* GameOverUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CF9D4272C0F5EB900ADF59F /* GameOverUI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3C10C3032B31F117007FC3B8 /* RocketBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RocketBullet.swift; sourceTree = "<group>"; };
 		3C10C3052B32184E007FC3B8 /* BoltBullet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoltBullet.swift; sourceTree = "<group>"; };
-		3C17D8CC2B2C617100359AD7 /* DisplayUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DisplayUI.swift; sourceTree = "<group>"; };
 		3C2878A52B2C9D7600AE553E /* Fighter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fighter.swift; sourceTree = "<group>"; };
 		3C2878A72B2CF98400AE553E /* Enemies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enemies.swift; sourceTree = "<group>"; };
 		3C2878A92B2CFD9800AE553E /* Scout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scout.swift; sourceTree = "<group>"; };
@@ -63,8 +64,11 @@
 		3CBBE6C12B29A2990083EA04 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3CBBE6C82B29A3940083EA04 /* MainShip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainShip.swift; sourceTree = "<group>"; };
 		3CBBE6CA2B29E3C60083EA04 /* Background.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Background.swift; sourceTree = "<group>"; };
+		3CCF21632C0E111A00C42A55 /* Minecraft.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Minecraft.ttf; sourceTree = "<group>"; };
 		3CF450232B4D852B00FC1C53 /* Scenario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scenario.swift; sourceTree = "<group>"; };
-		3CFF7CEF2B4C2EF40079600C /* Minecraft.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = Minecraft.ttf; path = "../../../../T-JAV-501-LYO_10/SpaceShooter/src/main/resources/Minecraft.ttf"; sourceTree = "<group>"; };
+		3CF9D4212C0F160800ADF59F /* MenuUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuUI.swift; sourceTree = "<group>"; };
+		3CF9D4252C0F5D2500ADF59F /* GameUI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameUI.swift; sourceTree = "<group>"; };
+		3CF9D4272C0F5EB900ADF59F /* GameOverUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameOverUI.swift; sourceTree = "<group>"; };
 		3CFF7CF32B4C34AD0079600C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -134,6 +138,8 @@
 			isa = PBXGroup;
 			children = (
 				3CFF7CF32B4C34AD0079600C /* Info.plist */,
+				3CCF21632C0E111A00C42A55 /* Minecraft.ttf */,
+				3CF9D4292C0F610000ADF59F /* UI */,
 				3C82EBFD2B304D6F002A236A /* Bullet */,
 				3C2878B12B2D01A400AE553E /* Protocol */,
 				3C2878A42B2C9D6300AE553E /* Enemies */,
@@ -144,14 +150,22 @@
 				3C56C2532B552ADD001BD117 /* Upgrade.swift */,
 				3CBBE6CA2B29E3C60083EA04 /* Background.swift */,
 				3CBBE6C82B29A3940083EA04 /* MainShip.swift */,
-				3C17D8CC2B2C617100359AD7 /* DisplayUI.swift */,
 				3CBBE6B92B29A2980083EA04 /* GameViewController.swift */,
 				3CBBE6BB2B29A2980083EA04 /* Main.storyboard */,
 				3CBBE6BE2B29A2990083EA04 /* Assets.xcassets */,
 				3CBBE6C02B29A2990083EA04 /* LaunchScreen.storyboard */,
-				3CFF7CEF2B4C2EF40079600C /* Minecraft.ttf */,
 			);
 			path = SpaceShooter;
+			sourceTree = "<group>";
+		};
+		3CF9D4292C0F610000ADF59F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3CF9D4272C0F5EB900ADF59F /* GameOverUI.swift */,
+				3CF9D4252C0F5D2500ADF59F /* GameUI.swift */,
+				3CF9D4212C0F160800ADF59F /* MenuUI.swift */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -214,7 +228,7 @@
 			files = (
 				3CBBE6BD2B29A2980083EA04 /* Main.storyboard in Resources */,
 				3CBBE6B42B29A2980083EA04 /* GameScene.sks in Resources */,
-				3CFF7CF02B4C2EF40079600C /* Minecraft.ttf in Resources */,
+				3CCF21642C0E111A00C42A55 /* Minecraft.ttf in Resources */,
 				3CBBE6BF2B29A2990083EA04 /* Assets.xcassets in Resources */,
 				3CBBE6C22B29A2990083EA04 /* LaunchScreen.storyboard in Resources */,
 			);
@@ -228,11 +242,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3C10C3042B31F117007FC3B8 /* RocketBullet.swift in Sources */,
+				3CF9D4222C0F160800ADF59F /* MenuUI.swift in Sources */,
 				3CBBE6B82B29A2980083EA04 /* GameScene.swift in Sources */,
 				3C6BD9AF2B3B1EDA0024A850 /* SpaceBullet.swift in Sources */,
 				3C82EBFF2B304D87002A236A /* EnergyBullet.swift in Sources */,
 				3C6BD9AD2B3B1EBF0024A850 /* CanonBullet.swift in Sources */,
 				3C2878B02B2CFED300AE553E /* Dreadnought.swift in Sources */,
+				3CF9D4262C0F5D2500ADF59F /* GameUI.swift in Sources */,
 				3CF450242B4D852B00FC1C53 /* Scenario.swift in Sources */,
 				3C10C3062B32184E007FC3B8 /* BoltBullet.swift in Sources */,
 				3C82EC012B304DAB002A236A /* Bullet.swift in Sources */,
@@ -240,13 +256,13 @@
 				3C82EC032B305309002A236A /* Animate.swift in Sources */,
 				3C2878A62B2C9D7600AE553E /* Fighter.swift in Sources */,
 				3C6BD9B32B3B1F010024A850 /* ZapperBullet.swift in Sources */,
+				3CF9D4282C0F5EB900ADF59F /* GameOverUI.swift in Sources */,
 				3CBBE6BA2B29A2980083EA04 /* GameViewController.swift in Sources */,
 				3C2878A82B2CF98400AE553E /* Enemies.swift in Sources */,
 				3C6BD9B12B3B1EF50024A850 /* RocketBulletP.swift in Sources */,
 				3C56C2542B552ADD001BD117 /* Upgrade.swift in Sources */,
 				3CBBE6C92B29A3940083EA04 /* MainShip.swift in Sources */,
 				3CBBE6B22B29A2980083EA04 /* AppDelegate.swift in Sources */,
-				3C17D8CD2B2C617100359AD7 /* DisplayUI.swift in Sources */,
 				3C2878AA2B2CFD9800AE553E /* Scout.swift in Sources */,
 				3CBBE6CB2B29E3C60083EA04 /* Background.swift in Sources */,
 			);

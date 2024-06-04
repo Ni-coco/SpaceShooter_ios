@@ -36,7 +36,7 @@ class Background: SKNode {
             bg2.setScale(max(scaleX, scaleY))
 
             // Position the second background node just above the first one
-            bg2.position = CGPoint(x: 0, y: bg1.position.y + bg1.size.height)
+            bg2.position = CGPoint(x: 0, y: bg1.size.height)
         }
     }
 
@@ -45,9 +45,9 @@ class Background: SKNode {
         bg2.position.y -= 1
     
         if (bg1.position.y <= -bg1.size.height) {
-            bg1.position.y = bg1.size.height
+            bg1.position.y = bg1.size.height - 5
         } else if (bg2.position.y <= -bg2.size.height) {
-            bg2.position.y = bg1.size.height
+            bg2.position.y = bg1.size.height - 5
         }
     }
     

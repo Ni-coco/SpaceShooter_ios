@@ -90,7 +90,7 @@ extension Enemies {
         if self is Dreadnought {
             return Upgrade(viewSize: self.viewSize, spawn: CGPoint(x: spriteList[0].position.x, y: spriteList[0].position.y - 10))
         }
-        else if Int(arc4random_uniform(0)) == 0 {
+        else if Int(arc4random_uniform(2)) == 0 {
             return Upgrade(viewSize: self.viewSize, spawn: CGPoint(x: spriteList[0].position.x, y: spriteList[0].position.y))
         }
         return nil

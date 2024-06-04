@@ -8,7 +8,7 @@
 import SpriteKit
 import UIKit
 
-class DisplayUI: SKNode {
+class GameUI: SKNode {
     
     var lifeUI: SKSpriteNode
     var shieldUI: SKSpriteNode
@@ -22,6 +22,7 @@ class DisplayUI: SKNode {
     let viewSize: CGRect
     var scale: CGFloat = 0
     var canShield: Bool = true
+    var score: String = ""
 
     init(viewSize: CGRect) {
         
@@ -59,7 +60,7 @@ class DisplayUI: SKNode {
         
         timerText.fontName = UIFont(name: "Minecraft", size: 5)?.fontName
         timerText.position = CGPoint(x: -(viewSize.width / 2) + 50, y: (viewSize.height / 2) - 40)
-        timerText.setScale(0.5)
+        timerText.setScale(scale * 0.8)
                             
         addChild(lifeUI)
         addChild(shieldUI)
@@ -121,6 +122,16 @@ class DisplayUI: SKNode {
         let min = Int((remainTime / 1000) / 60)
         let sec = Int((remainTime / 1000) % 60)
         timerText.text = String(format: "%02d:%02d", min, sec) 
+        score = String(format: "%02d:%02d", min, sec)
+    }
+    
+    func getScore() -> String {
+        return score
+    }
+    
+    func reset() {
+        launchTime = Int64(Date().timeIntervalSince1970 * 1000)
+        canShield = true
     }
 }
 
