@@ -48,9 +48,10 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         addBackground()
         
         addChild(displayScene)
-        
-//        addChild(loadGameScene())
         displayScene.addChild(loadMenuScene())
+        
+//        loadGameScene()
+//        displayScene.addChild(loadGameOverScene())
     }
     
     func loadGameScene() -> SKNode {
@@ -76,6 +77,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         gameOverUI = GameOverUI(viewSize: viewSize)
         gameOverUI!.setTime(score: gameUI!.getScore())
         gameOverScene.addChild(gameOverUI!)
+        gameOverScene.zPosition = 10
         
         return gameOverScene
     }
