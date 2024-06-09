@@ -49,9 +49,6 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         
         addChild(displayScene)
         displayScene.addChild(loadMenuScene())
-        
-//        loadGameScene()
-//        displayScene.addChild(loadGameOverScene())
     }
     
     func loadGameScene() -> SKNode {
@@ -68,6 +65,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     
     func loadMenuScene() -> SKNode {
         menuUI = MenuUI(viewSize: viewSize)
+        menuScene.removeAllChildren()
         menuScene.addChild(menuUI!)
         
         return menuScene
@@ -76,8 +74,9 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func loadGameOverScene() -> SKNode {
         gameOverUI = GameOverUI(viewSize: viewSize)
         gameOverUI!.setTime(score: gameUI!.getScore())
+        gameOverScene.removeAllChildren()
         gameOverScene.addChild(gameOverUI!)
-        gameOverScene.zPosition = 10
+        gameOverScene.zPosition = 99
         
         return gameOverScene
     }
@@ -85,6 +84,12 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
     func addBackground() {
         addChild(background)
         background.scaleToSceneSize()
+    }
+    
+    func resetAll() {
+        scenario!.reset()
+        player!.reset()
+        gameUI!.reset()
     }
     
     func touchDown(atPoint pos : CGPoint) {
@@ -104,17 +109,17 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             let touchedNode = atPoint(location)
             
             if (!isPlaying) {
-                if (touchedNode == menuUI!.startBtn || touchedNode == menuUI!.startText) {
+                if (touchedNode == menuUI?.startBtn || touchedNode == menuUI?.startText || touchedNode == gameOverUI?.restartBtn || touchedNode == gameOverUI?.restartText) {
+                    resetAll();
                     displayScene.removeAllChildren()
                     displayScene.addChild(loadGameScene())
-                    
-                    scenario!.reset()
-                    player!.reset()
-                    gameUI!.reset()
-                    
                     isPlaying = true
                 } else if (touchedNode == menuUI!.scoreBtn || touchedNode == menuUI!.scoreText) {
                     print("display scoreboard")
+                } else if (touchedNode == gameOverUI!.exitBtn || touchedNode == gameOverUI!.exitText) {
+                    resetAll()
+                    displayScene.removeAllChildren()
+                    displayScene.addChild(loadMenuScene())
                 }
             } else {
                 if (touchedNode == gameUI!.shieldBtn || touchedNode == gameUI!.shieldText) && gameUI!.shieldAvailable() {
@@ -188,7 +193,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
         if !player!.isShooting && !player!.isHit() {
             let bulletsToAdd = player!.shoot()
             for bullet in bulletsToAdd {
-                addChild(bullet.bulletSprite)
+                displayScene.addChild(bullet.bulletSprite)
                 playerBullets.append(bullet)
             }
         }
@@ -210,7 +215,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 enemiesCount -= 1
                 if let upgrade = enemy.getUpgrade() {
                     upgradeList.append(upgrade)
-                    addChild(upgrade)
+                    displayScene.addChild(upgrade)
                 }
                 return true
             }
@@ -222,7 +227,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             if !bullets.isEmpty {
                 for bullet in bullets {
                     enemiesBullets.append(bullet)
-                    addChild(bullet.bulletSprite)
+                    displayScene.addChild(bullet.bulletSprite)
                 }
             }
             return false
@@ -246,7 +251,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                 self.enemiesCount = 0
                 for enemy in self.scenario!.getLevel() {
                     self.enemies.append(enemy)
-                    self.addChild(enemy as! SKNode)
+                    self.displayScene.addChild(enemy as! SKNode)
                     self.enemiesCount += 1
                 }
             }
@@ -334,9 +339,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     displayScene.removeAllChildren()
                     displayScene.addChild(loadGameOverScene())
                     
-                    scenario!.reset()
-                    player!.reset()
-                    gameUI!.reset()
+                    resetAll()
                     
                     isPlaying = false
                 }
@@ -360,9 +363,7 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                     displayScene.removeAllChildren()
                     displayScene.addChild(loadGameOverScene())
                     
-                    scenario!.reset()
-                    player!.reset()
-                    gameUI!.reset()
+                    resetAll()
                     
                     isPlaying = false
                 }
