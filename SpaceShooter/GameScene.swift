@@ -110,19 +110,22 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
             
             if (!isPlaying) {
                 if (touchedNode == menuUI?.startBtn || touchedNode == menuUI?.startText || touchedNode == gameOverUI?.restartBtn || touchedNode == gameOverUI?.restartText) {
-                    resetAll();
                     displayScene.removeAllChildren()
                     displayScene.addChild(loadGameScene())
+                    resetAll();
                     isPlaying = true
-                } else if (touchedNode == menuUI!.scoreBtn || touchedNode == menuUI!.scoreText) {
+                } else if (touchedNode == menuUI?.scoreBtn || touchedNode == menuUI?.scoreText) {
                     print("display scoreboard")
-                } else if (touchedNode == gameOverUI!.exitBtn || touchedNode == gameOverUI!.exitText) {
+                } else if (touchedNode == gameOverUI?.exitBtn || touchedNode == gameOverUI?.exitText) {
                     resetAll()
                     displayScene.removeAllChildren()
                     displayScene.addChild(loadMenuScene())
+                } else if (touchedNode == gameUI?.pausedBtn) {
+                    isPlaying = !isPlaying
+                    gameUI!.switchPaused(paused: false)
                 }
             } else {
-                if (touchedNode == gameUI!.shieldBtn || touchedNode == gameUI!.shieldText) && gameUI!.shieldAvailable() {
+                if (touchedNode == gameUI?.shieldBtn || touchedNode == gameUI?.shieldText) && gameUI!.shieldAvailable() {
                     player!.activateShield()
                     DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
                         for enemy in self.enemies {
@@ -133,7 +136,11 @@ class GameScene: SKScene, SKPhysicsContactDelegate {
                         }
                     }
                     gameUI!.manageShieldUI()
-                } else {
+                } else if (touchedNode == gameUI?.pausedBtn) {
+                    isPlaying = !isPlaying
+                    gameUI!.switchPaused(paused: true)
+                }
+                else {
                     player!.manageEngineEffect(isMoving: true)
                     lastTouches.append(touches.first!)
                     updateDirection()

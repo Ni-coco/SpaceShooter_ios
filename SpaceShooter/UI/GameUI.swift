@@ -13,9 +13,13 @@ class GameUI: SKNode {
     var lifeUI: SKSpriteNode
     var shieldUI: SKSpriteNode
     var shieldBtn: SKSpriteNode
+    var pausedBtn: SKSpriteNode
+    var homeBtn: SKSpriteNode
+    var muteBtn: SKSpriteNode
     var shieldText: SKLabelNode = SKLabelNode()
     var waveText: SKLabelNode = SKLabelNode()
     var timerText: SKLabelNode = SKLabelNode()
+    var pausedText: SKLabelNode = SKLabelNode()
     
     var launchTime = Int64(Date().timeIntervalSince1970 * 1000)
     
@@ -31,6 +35,9 @@ class GameUI: SKNode {
         lifeUI = SKSpriteNode(texture: SKTexture(imageNamed: "health4"))
         shieldUI = SKSpriteNode(texture: SKTexture(imageNamed: "shield4"))
         shieldBtn = SKSpriteNode(texture: SKTexture(imageNamed: "Container"))
+        pausedBtn = SKSpriteNode(texture: SKTexture(imageNamed: "Pause"))
+        homeBtn = SKSpriteNode(texture: SKTexture(imageNamed: "HomeBtn"))
+        muteBtn = SKSpriteNode(texture: SKTexture(imageNamed: "MuteSound"))
         
         super.init()
         
@@ -39,6 +46,9 @@ class GameUI: SKNode {
         lifeUI.position = CGPoint(x: -(viewSize.maxX / 2) + (75 * scale), y: -(viewSize.maxY / 2) + (37.5 * scale))
         shieldUI.position = CGPoint(x: -(viewSize.maxX / 2) + (75 * scale), y: -(viewSize.maxY / 2) + (62.5 * scale))
         shieldBtn.position = CGPoint(x: (viewSize.maxX / 2) - (80 * scale), y: -(viewSize.maxY / 2) + (50 * scale))
+        pausedBtn.position = CGPoint(x: (viewSize.maxX / 2) - (50 * scale), y: (viewSize.maxY / 2) - (35 * scale))
+        homeBtn.position = CGPoint(x: (viewSize.maxX / 2) - (50 * scale), y: (viewSize.maxY / 2) - (85 * scale))
+        muteBtn.position = CGPoint(x: (viewSize.maxX / 2) - (50 * scale), y: (viewSize.maxY / 2) - (135 * scale))
         
         lifeUI.zPosition = 1
         lifeUI.setScale(scale)
@@ -48,6 +58,17 @@ class GameUI: SKNode {
         
         shieldBtn.zPosition = 1
         shieldBtn.setScale(scale * 0.5)
+        
+        pausedBtn.zPosition = 1
+        pausedBtn.setScale(scale * 0.7)
+        
+        homeBtn.zPosition = 1
+        homeBtn.setScale(scale * 0.8)
+        homeBtn.isHidden = true
+        
+        muteBtn.zPosition = 1
+        muteBtn.setScale(scale * 0.8)
+        muteBtn.isHidden = true
         
         shieldText = SKLabelNode(text: "Shield")
         shieldText.fontName = UIFont(name: "Minecraft", size: 40)?.fontName
@@ -61,12 +82,23 @@ class GameUI: SKNode {
         timerText.fontName = UIFont(name: "Minecraft", size: 5)?.fontName
         timerText.position = CGPoint(x: -(viewSize.width / 2) + 50, y: (viewSize.height / 2) - 40)
         timerText.setScale(scale * 0.8)
+        
+        pausedText = SKLabelNode(text: "PAUSED")
+        pausedText.fontName = UIFont(name: "Minecraft", size: 60)?.fontName
+        pausedText.position = CGPoint(x: 0, y: 0)
+        pausedText.isHidden = true
+        
+        
                             
         addChild(lifeUI)
         addChild(shieldUI)
         addChild(shieldBtn)
+        addChild(pausedBtn)
         addChild(waveText)
         addChild(timerText)
+        addChild(pausedText)
+        addChild(homeBtn)
+        addChild(muteBtn)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -127,6 +159,12 @@ class GameUI: SKNode {
     
     func getScore() -> String {
         return score
+    }
+    
+    func switchPaused(paused: Bool) {
+        pausedText.isHidden = !paused
+        homeBtn.isHidden = !paused
+        muteBtn.isHidden = !paused
     }
     
     func reset() {
